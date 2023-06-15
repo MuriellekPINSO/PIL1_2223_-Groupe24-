@@ -2,8 +2,21 @@
 
 {% block 'title' %} Se Connecter {% endblock %}
 
-{% block 'main' %} 
-    <h1>
-        Login Page
-    </h1>
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="insform">
+    <form action="">
+        <label for="Matricule">Matricule</label><br>
+        <input type="text" name="matricule" id="matricule" maxlength="8" placeholder="202343456"><br>
+        <label for="password">Mot de passe</label><br>
+        <input type="password" name="password" id="password" placeholder="password"> <br>
+        <button type="submit">S'inscrire</button>
+        <a href="#" style="margin-left: 20%;">Forgot Password?</a>
+    </form>
+</div>
 {% endblock %}

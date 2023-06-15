@@ -1,3 +1,31 @@
-<div>
-    <h1>Header component</h1>
+<div class="nav">
+    <div class="logo">
+        <h1 style="color: white; text-transform: uppercase;">SCHELDUlE MANAGE</h1>
+    </div>
+    <nav class="after-auth" style="display: none;">
+        <ul>
+            <li><a href="">Deconnection</a></li>
+            <li class="deroulant"><a href="">Master&ensp;</a>
+                <ul class="sous">
+                    <li><a href="{% url 'master' 1 %}">Master1</a></li>
+                    <li><a href="{% url 'master' 2 %}">Master2</a></li>
+                </ul>
+            </li>
+            <li class="deroulant"><a href="">Licence &ensp;</a>
+                <ul class="sous">
+                    <li><a href="{% url 'licence' 1 %}">Licence1</a></li>
+                    <li><a href="{% url 'licence' 2 %}">Licence2</a></li>
+                    <li><a href="{% url 'licence' 3 %}">Licence3</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div class="log before-auth">
+        <ul>
+            <li>
+                <a href="{% url 'register' %}">S'inscrire</a> <br>
+            </li>
+            <li class="active"> <a href="{% url 'login' %}">Se connecter</a></li>
+        </ul>
+    </div>
 </div>

@@ -2,8 +2,26 @@
 
 {% block 'title' %} Creer un compte {% endblock %}
 
-{% block 'main' %} 
-    <h1>
-        Register Page
-    </h1>
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="insform">
+    <form action="">
+        <label for="Matricule">Matricule</label><br>
+        <input type="text" name="matricule" id="matricule" maxlength="8" placeholder="202343456"><br>
+        <label for="Nom">Nom</label> <br>
+        <input type="text" name="nom" id="nom" placeholder="Nom"><br>
+        <label for="Prenom">Prenom</label><br>
+        <input type="text" name="prenom" id="prenom" placeholder="Prenom"><br>
+        <label for="mail">EMail</label><br>
+        <input type="email" name="mail" id="mail" placeholder="aaaa@gmail.com"><br>
+        <label for="password">Mot de passe</label><br>
+        <input type="password" name="password" id="password" placeholder="password"> <br>
+        <button type="submit">S'inscrire</button>
+    </form>
+</div>
 {% endblock %}
