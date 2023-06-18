@@ -38,6 +38,7 @@ class Licence(models.Model):
        
 class Master(models.Model):
     nom_Master=models.CharField(25)
+    
 
     
     
