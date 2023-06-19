@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authentification',
+    'home',
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'integrate.wsgi.application'
 
+LOGIN_URL = "authentification/login"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

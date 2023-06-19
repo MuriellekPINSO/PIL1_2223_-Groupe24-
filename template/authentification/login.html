@@ -10,11 +10,25 @@
     }
 </style>
 <div class="insform">
-    <form action="">
+    <form action method="post">
+        {% if errors %}
+        <div class="w-100 justify-content-center">
+            <div class="m-auto border-danger">
+                <div style="padding: 1rem;" class="text-light">
+                    {% for error in errors %}
+                    <p> {{ error }} </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% csrf_token %}
         <label for="Matricule">Matricule</label><br>
-        <input type="text" name="matricule" id="matricule" maxlength="8" placeholder="202343456"><br>
+        <input type="text" name="matricule" id="matricule" maxlength="8"
+            placeholder="202343456"><br>
         <label for="password">Mot de passe</label><br>
-        <input type="password" name="password" id="password" placeholder="password"> <br>
+        <input type="password" name="password" id="password"
+            placeholder="password"> <br>
         <button type="submit">S'inscrire</button>
         <a href="#" style="margin-left: 20%;">Forgot Password?</a>
     </form>

@@ -1,6 +1,7 @@
 .after-auth {
     display: none;
 }
+
 .nav {
     display: flex;
     width: 100%;
@@ -85,6 +86,7 @@
     font-size: 20px;
     color: rgb(168, 168, 243);
 }
+
 /*  les deux */
 
 .insform form input {
@@ -100,7 +102,7 @@
     width: 80px;
     background-image: linear-gradient(to left, #e66465, #9198e5);
     border-radius: 8px;
-}  
+}
 
 .insform {
     width: auto;
@@ -152,7 +154,8 @@ nav a:hover {
     color: orange;
     border-bottom: 2px solid gold;
 }
-    /* 1*/
+
+/* 1*/
 
 .sous {
     display: none;
@@ -161,7 +164,7 @@ nav a:hover {
     position: absolute;
     width: 100%;
     z-index: 1000;
-} 
+}
 
 nav>ul li:hover .sous {
     display: block;
@@ -183,19 +186,21 @@ nav>ul li:hover .sous {
     background-color: rgba(200, 200, 200, 0.1);
 }
 
-    /* ici!*/
+/* ici!*/
 
 nav ul li .acti {
     color: orange;
     border-bottom: 2px solid gold;
 }
 
-@media  all and (max-width: 1030px)
- {
+
+@media all and (max-width: 1030px) {
     .deroulant>a::after {
         content: "";
         font-size: 12px;
+
     }
+
     .sous {
         display: none;
         box-shadow: 0px 1px 2px #CCC;
@@ -212,29 +217,114 @@ nav ul li .acti {
         border-style: none;
         margin-bottom: 3vh;
     }
-    
+
     .insform form button {
         height: 30px;
         width: 80px;
         background-image: linear-gradient(to left, #e66465, #9198e5);
         border-radius: 8px;
-    } 
+    }
 
- }
-        /* a revoir */
+}
 
- @media only screen and (max-width:768px) {
+/* a revoir */
+
+@media only screen and (max-width:768px) {
+
     .eventform form .first input,
     .eventform form .second input,
     .eventform form .third input,
     .eventform form .fourth input,
     .eventform form .third select {
-      margin: 0;
-      width: 100%;
+        margin: 0;
+        width: 100%;
     }
-    
 
+
+}
+
+
+
+.after-auth {
+    display: block !important;
+}
+
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-between {
+    justify-content: space-between;
+}
+
+.justify-content-center {
+    justify-content: space-evenly;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.border-danger {
+    border: 1px solid red;
+}
+
+.rounded {
+    border-radius: 20px;
+}
+
+.mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.m-2 {
+    margin: 1.5rem;
+}
+
+.text-light {
+    color: #CCC;
+}
+
+/* a revoir */
+
+@media all and (max-height: 1080px) {
+    .deroulant>a::after {
+        content: "";
+        font-size: 12px;
+        
     }
+
+    .sous {
+        display: none;
+        box-shadow: 0px 1px 2px #CCC;
+        background-color: black;
+        position: absolute;
+        width: 100%;
+        z-index: 1000;
+    }
+
+    .insform form input {
+        width: 300px;
+        height: 35px;
+        border-radius: 6px;
+        border-style: none;
+        margin-bottom: 3vh;
+    }
+
+    .insform form button {
+        height: 30px;
+        width: 80px;
+        background-image: linear-gradient(to left, #e66465, #9198e5);
+        border-radius: 8px;
+    }
+
+}
 
 
 

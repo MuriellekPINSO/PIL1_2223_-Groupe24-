@@ -1,15 +1,17 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
-
+@login_required()
 def home(request):
 
     context = {}
 
-    return render(request, 'home/default.html')
+    return render(request, 'home/default.html', context)
     
-    
+
+@login_required()
 def licence(request, pk):
 
     context = {
@@ -18,7 +20,7 @@ def licence(request, pk):
 
     return render(request, 'home/licence.html', context)
     
-    
+@login_required()
 def master(request, pk):
 
     context = {
