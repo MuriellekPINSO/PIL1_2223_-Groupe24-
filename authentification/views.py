@@ -18,6 +18,10 @@ def login(request):
             user = authenticate(request, username=matricule, password=password)
 
             if user is not None:
+                
+                if user.username == "9999":
+                    user_login(request, user)
+                    return redirect('admin_index')
                 user_login(request, user)
                 return redirect('home')
             errors.append("Mot de passe ou numero matricule invalide")

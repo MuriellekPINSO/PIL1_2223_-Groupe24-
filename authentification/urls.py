@@ -7,4 +7,5 @@ urlpatterns = [
     path('forgot-password', views.new_password, name="password.forgot"),
     path('logout', views.logout, name="logout"),
     
+    
 ]

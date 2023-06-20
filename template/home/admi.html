@@ -1,0 +1,115 @@
+
+
+{% extends 'base/base.html' %}
+
+{% block 'title' %} ADMINISTRATION {% endblock %}
+
+
+  
+{% block 'main' %}
+<style>
+  .bg-auth {
+      background-color: dodgerblue;
+      background-size: cover;
+  }
+</style>
+
+
+
+    <h2 class="titre">emplois du temps</h2>
+    <table id="mon-tableau">
+        <tr>
+          <th><input type="text" placeholder="Semestre-Semaine" class="ss"></th>
+          <th class="jours">Lundi</th>
+          <th class="jours">Mardi</th>
+          <th class="jours">Mercredi</th>
+          <th class="jours">Jeudi</th>
+          <th class="jours">Vendredi</th>
+          <th class="jours">Samedi</th>
+        </tr>
+        <tr>
+          <td class="lignes">Horraires</td>
+          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
+        </tr>
+        <tr>
+          <td class="lignes">Nom du Cours</td>
+          <td><input class="input" type="text" placeholder="cours"></td>
+          <td><input class="input" type="text" placeholder="cours"></td>
+          <td><input class="input" type="text" placeholder="cours"></td>
+          <td><input class="input" type="text" placeholder="cours"></td>
+          <td><input class="input" type="text" placeholder="cours"></td>
+          <td><input class="input" type="text" placeholder="cours"></td>
+        </tr>
+        <tr>
+            <td class="lignes">Professeur</td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+          </tr>
+        <tr>
+            <td class="lignes">Salle</td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+        </tr>
+        <tr class="interligne">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="lignes">Horraires</td>
+            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+          </tr>
+          <tr>
+            <td class="lignes">Nom du Cours</td>
+            <td><input class="input" type="text" placeholder="cours"></td>
+            <td><input class="input" type="text" placeholder="cours"></td>
+            <td><input class="input" type="text" placeholder="cours"></td>
+            <td><input class="input" type="text" placeholder="cours"></td>
+            <td><input class="input" type="text" placeholder="cours"></td>
+            <td><input class="input" type="text" placeholder="cours"></td>
+          </tr>
+          <tr>
+            <td class="lignes">Professeur</td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input type="text" class="input" placeholder="professeur"></td>
+          </tr>
+          <tr>
+            <td class="lignes">Salle</td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input class="input" type="text" placeholder="salle"></td>
+        </tr>
+      </table>   
+      <p class="ndf"><input type="text" class="note" placeholder="une information particulière à communiquer ? tapez là ici"></p>
+      <h1 class="signature">Cordialement, l'administation.</h1> 
+      <p class="saveb"><button class="save">SAUVEGARDER</button></p>
+{% endblock %}

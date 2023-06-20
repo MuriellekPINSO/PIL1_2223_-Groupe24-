@@ -21,8 +21,8 @@ class classes(models.Model):
 
 class Emplois(models.Model):
      Filiere=models.ForeignKey(Filiere,on_delete=models.CASCADE)
-     annee=models.CharField(max_length=64)
-     date=models.DateField()
+     annee=models.CharField(default="Annee",max_length=64)
+     date=models.DateField(default=1/1/2000,verbose_name="date")
    
 class Programme(models.Model):
     Filiere=models.ForeignKey(Filiere,on_delete=models.CASCADE)
@@ -34,6 +34,7 @@ class Programme(models.Model):
     heure_fin=models.CharField(max_length=15)
     
 
+ 
 
     
 

@@ -28,3 +28,7 @@ def master(request, pk):
     }
 
     return render(request, 'home/master.html', context)
+
+@login_required()
+def admin_index(request):
+    return render(request, 'home/admi.html')
