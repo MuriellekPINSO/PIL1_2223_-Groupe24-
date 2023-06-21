@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login as user_login, logout as use
 from django.contrib.auth.models import User
 
 
+
 def login(request):
     if request.user.is_authenticated:
         return redirect('home')
@@ -19,7 +20,7 @@ def login(request):
 
             if user is not None:
                 
-                if user.username == "9999":
+                if user.username == "55555":
                     user_login(request, user)
                     return redirect('admin_index')
                 user_login(request, user)

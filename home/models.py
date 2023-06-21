@@ -19,19 +19,23 @@ class classes(models.Model):
 
 
 
-class Emplois(models.Model):
-     Filiere=models.ForeignKey(Filiere,on_delete=models.CASCADE)
-     annee=models.CharField(default="Annee",max_length=64)
-     date=models.DateField(default=1/1/2000,verbose_name="date")
+class Enseignants(models.Model):
+     nom_Enseignant=models.CharField(max_length=64)
+     email_Enseignant=models.CharField(max_length=50)
+     
+class Semaine(models.Model):
+    nom_semaine=models.CharField(max_length=64)
    
 class Programme(models.Model):
-    Filiere=models.ForeignKey(Filiere,on_delete=models.CASCADE)
-    Cours=models.ForeignKey(Cours,on_delete=models.CASCADE)
-    
-    Salle=models.ForeignKey(Salle,on_delete=models.CASCADE)
+    Filiere=models.CharField(max_length=64)
+    Cours=models.CharField(max_length=64)
+    Salle=models.CharField(max_length=64)
     jour=models.CharField(max_length=15)
     heure_deb=models.CharField(max_length=15)
     heure_fin=models.CharField(max_length=15)
+    annee=models.CharField(max_length=17,default=1)
+    Enseignants=models.CharField(max_length=64)
+    Semaine=models.CharField(max_length=64)
     
 
  

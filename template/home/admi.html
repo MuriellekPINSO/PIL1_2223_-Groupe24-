@@ -17,9 +17,30 @@
 
 
     <h2 class="titre">emplois du temps</h2>
+  <form action="" method="post" >
+    {%csrf_token%}
+    <select name="classe" id="classe" value="classe">
+      <option value="licence1">licence1/G1</option>
+      <option value="licence1">licence1/G2</option>
+      <option value="licence2">licence2</option>
+      <option value="licence3">licence3</option>
+      <option value="Master1">Master1</option>
+      <option value="Master2">Master2</option>
+      
+    </select>
+    <select name="Filiere" id="Filiere">
+
+      <option value="GL">GL</option>
+      <option value="IA">IA</option>
+      <option value="IM">IM</option>
+      <option value="SI">SI</option>
+      <option value="SEIOT">SEIOT</option>
+    </select>
+    
     <table id="mon-tableau">
+      
         <tr>
-          <th><input type="text" placeholder="Semestre-Semaine" class="ss"></th>
+          <th><input type="text" placeholder="Semestre-Semaine" name="ss" class="ss"></th>
           <th class="jours">Lundi</th>
           <th class="jours">Mardi</th>
           <th class="jours">Mercredi</th>
@@ -29,39 +50,39 @@
         </tr>
         <tr>
           <td class="lignes">Horraires</td>
-          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
-          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
-          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
-          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
-          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
-          <td><input class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input name="ptl" class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input  name="ptm" class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input  name="ptme" class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input  name="ptj" class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input name="ptv" class="input" type="text" placeholder="premiere tranche d'heures"></td>
+          <td><input name="pts" class="input" type="text" placeholder="premiere tranche d'heures"></td>
         </tr>
         <tr>
           <td class="lignes">Nom du Cours</td>
-          <td><input class="input" type="text" placeholder="cours"></td>
-          <td><input class="input" type="text" placeholder="cours"></td>
-          <td><input class="input" type="text" placeholder="cours"></td>
-          <td><input class="input" type="text" placeholder="cours"></td>
-          <td><input class="input" type="text" placeholder="cours"></td>
-          <td><input class="input" type="text" placeholder="cours"></td>
+          <td><input name="pc1" class="input" type="text" placeholder="cours"></td>
+          <td><input name="pc2" class="input" type="text" placeholder="cours"></td>
+          <td><input  name="pc3" class="input" type="text" placeholder="cours"></td>
+          <td><input  name="pc4" class="input" type="text" placeholder="cours"></td>
+          <td><input name="pc5" class="input" type="text" placeholder="cours"></td>
+          <td><input name="pc6" class="input" type="text" placeholder="cours"></td>
         </tr>
         <tr>
             <td class="lignes">Professeur</td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input  name="pf1" type="text" class="input" placeholder="professeur"></td>
+            <td><input  name="pf2" type="text" class="input" placeholder="professeur"></td>
+            <td><input  name="pf3" type="text" class="input" placeholder="professeur"></td>
+            <td><input name="pf4" type="text" class="input" placeholder="professeur"></td>
+            <td><input  name="pf5" type="text" class="input" placeholder="professeur"></td>
+            <td><input name="pf6" type="text" class="input" placeholder="professeur"></td>
           </tr>
         <tr>
             <td class="lignes">Salle</td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input name="ps1" class="input" type="text" placeholder="salle"></td>
+            <td><input  name="ps2" class="input" type="text" placeholder="salle"></td>
+            <td><input name="ps3" class="input" type="text" placeholder="salle"></td>
+            <td><input name="ps4" class="input" type="text" placeholder="salle"></td>
+            <td><input name="ps5" class="input" type="text" placeholder="salle"></td>
+            <td><input name="ps6" class="input" type="text" placeholder="salle"></td>
         </tr>
         <tr class="interligne">
             <td></td>
@@ -74,42 +95,43 @@
         </tr>
         <tr>
             <td class="lignes">Horraires</td>
-            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
-            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
-            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
-            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
-            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
-            <td><input class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input name="pd1" class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input name="pd2" class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input name="pd3" class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input name="pd4" class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input name="pd5" class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
+            <td><input name="pd6" class="input" type="text" placeholder="deuxieme tranche d'heures"></td>
           </tr>
           <tr>
             <td class="lignes">Nom du Cours</td>
-            <td><input class="input" type="text" placeholder="cours"></td>
-            <td><input class="input" type="text" placeholder="cours"></td>
-            <td><input class="input" type="text" placeholder="cours"></td>
-            <td><input class="input" type="text" placeholder="cours"></td>
-            <td><input class="input" type="text" placeholder="cours"></td>
-            <td><input class="input" type="text" placeholder="cours"></td>
+            <td><input name="pdc1"class="input" type="text" placeholder="cours"></td>
+            <td><input  name="pdc2" class="input" type="text" placeholder="cours"></td>
+            <td><input name="pdc3" class="input" type="text" placeholder="cours"></td>
+            <td><input name="pdc4" class="input" type="text" placeholder="cours"></td>
+            <td><input name="pdc5" class="input" type="text" placeholder="cours"></td>
+            <td><input name="pdc6" class="input" type="text" placeholder="cours"></td>
           </tr>
           <tr>
             <td class="lignes">Professeur</td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
-            <td><input type="text" class="input" placeholder="professeur"></td>
+            <td><input  name="pfs1" type="text" class="input" placeholder="professeur"></td>
+            <td><input name="pfs2" type="text" class="input" placeholder="professeur"></td>
+            <td><input name="pfs3" type="text" class="input" placeholder="professeur"></td>
+            <td><input name="pfs4" type="text" class="input" placeholder="professeur"></td>
+            <td><input name="pfs5" type="text" class="input" placeholder="professeur"></td>
+            <td><input name="pfs6" type="text" class="input" placeholder="professeur"></td>
           </tr>
           <tr>
             <td class="lignes">Salle</td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
-            <td><input class="input" type="text" placeholder="salle"></td>
+            <td><input name="pss1" class="input" type="text" placeholder="salle"></td>
+            <td><input name="pss2" class="input" type="text" placeholder="salle"></td>
+            <td><input name="pss3" class="input" type="text" placeholder="salle"></td>
+            <td><input name="pss4" class="input" type="text" placeholder="salle"></td>
+            <td><input name="pss5" class="input" type="text" placeholder="salle"></td>
+            <td><input name="pss6" class="input" type="text" placeholder="salle"></td>
         </tr>
       </table>   
       <p class="ndf"><input type="text" class="note" placeholder="une information particulière à communiquer ? tapez là ici"></p>
       <h1 class="signature">Cordialement, l'administation.</h1> 
-      <p class="saveb"><button class="save">SAUVEGARDER</button></p>
+      <p class="saveb"><input name="info" type="submit" class="save" value="SAUVEGARDER"></p>
+    </form>
 {% endblock %}

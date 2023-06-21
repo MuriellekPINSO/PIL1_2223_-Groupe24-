@@ -12,15 +12,15 @@
             <li><a href="{% url 'logout' %}">Deconnection</a></li>
             <li class="deroulant"><a href>Master&ensp;</a>
                 <ul class="sous">
-                    <li><a href="{% url 'master' 1 %}">Master1</a></li>
-                    <li><a href="{% url 'master' 2 %}">Master2</a></li>
+                    <li><a href="{% url 'home:master' 1 %}">Master1</a></li>
+                    <li><a href="{% url 'home:master' 2 %}">Master2</a></li>
                 </ul>
             </li>
             <li class="deroulant"><a href>Licence &ensp;</a>
                 <ul class="sous">
-                    <li><a href="{% url 'licence' 1 %}">Licence1</a></li>
-                    <li><a href="{% url 'licence' 2 %}">Licence2</a></li>
-                    <li><a href="{% url 'licence' 3 %}">Licence3</a></li>
+                    <li><a href="{% url 'home:licence' 1 %}">Licence1</a></li>
+                    <li><a href="{% url 'home:licence' 2 %}">Licence2</a></li>
+                    <li><a href="{% url 'home:licence' 3 %}">Licence3</a></li>
                 </ul>
             </li>
         </ul>
