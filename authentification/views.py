@@ -81,10 +81,38 @@ def register(request):
 
 def new_password(request):
 
-    context = {}
+    errors = []  
+    if request.method == 'POST':
+        matricule = request.POST.get('matricule')
+        password = request.POST.get('password')
+        password_confirmation = request.POST.get('password_confirmation')
+    
+        if matricule and password and password_confirmation:
+            user = User.objects.filter(username=matricule).first()
+
+            if user is None:
+                errors.append("Matricule non trouvé")
+
+            else:
+                if password_confirmation != password:
+                    errors.append("Mots de passe non conformes")
+
+                else: 
+                    user.set_password(password)
+                    user.save()
+                    user_login(request, user)
+
+                    return redirect('home')  
+        else:
+            errors.append("Remplissez tous les champs")   
+    context = {
+        'errors': errors
+    }     
 
     return render(request, 'authentification/forgot-password.html', context)
+
 
 def logout(request):
     user_logout(request)
     return redirect('login')
+

@@ -80,10 +80,10 @@ LOGIN_URL = "authentification/login"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "project",
+        "NAME": "project-l1",
         "USER": "root",
         "PASSWORD": "",
-        'HOST': 'localhost',
+        'HOST': '127.0.0.2',
     }
 }
 
