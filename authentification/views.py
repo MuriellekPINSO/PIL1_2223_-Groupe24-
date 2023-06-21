@@ -19,7 +19,7 @@ def login(request):
 
             if user is not None:
                 
-                if user.username == "9999":
+                if user.username == "55555":
                     user_login(request, user)
                     return redirect('admin_index')
                 user_login(request, user)
