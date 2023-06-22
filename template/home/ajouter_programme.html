@@ -1,0 +1,99 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Creer un compte {% endblock %}
+
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="insform">
+    <form action method="POST">
+        {% if errors %}
+        <div class="w-100 justify-content-center">
+            <div class="m-auto border-danger">
+                <div style="padding: 1rem;" class="text-light">
+                    {% for error in errors %}
+                    <p> {{ error }} </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% csrf_token %}
+        <label for="heure_debut">Heure debut</label><br>
+        <input type="text" name="heure_debut" id="heure_debut" 
+            placeholder="14 "><br>
+
+        <label for="heure_fin">Heure fin</label><br>
+        <input type="text" name="heure_fin" id="heure_fin" 
+            placeholder="18 "><br><br>
+
+
+        <div>
+            <label for="jour">Jour :</label>
+            <select id="jour" name="jour">
+            
+                <option value="Lundi">Lundi</option>
+                <option value="Mardi">Mardi</option>
+                <option value="Mercredi">Mercredi</option>
+                <option value="Jeudi">Jeudi</option>
+                <option value="Vendredi">Vendredi</option>
+                <option value="Samedi">Samedi</option>
+            
+            </select>
+        </div><br>
+
+        <div>
+            <label for="salle">Salle :</label>
+            <select id="salle" name="salle">
+            {% for salle in salles %}
+                <option value="{{ salle.id }}">{{ salle.nom_Salle }}</option>
+            {% endfor %}
+            </select>
+        </div><br>
+
+        
+
+        <div>
+            <label for="semaine">Semaine :</label>
+            <select id="semaine" name="semaine">
+            {% for semaine in semaines %}
+                <option value="{{ semaine.id }}" {% if semaine.id == semaineActuelle.id   %} selected {% endif %}  >{{ semaine.nemuro_semaine }}</option>
+            {% endfor %}
+            </select>
+        </div><br>
+        
+        <div>
+            <label for="matiere">Metière :</label>
+            <select id="matiere" name="matiere">
+            {% for matiere in matieres %}
+                <option value="{{ matiere.id }}" >{{ matiere.nom_cours }}</option>
+            {% endfor %}
+            </select>
+        </div><br>
+        
+        <div>
+            <label for="filieres">Filière :</label>
+            <select id="filieres" name="filieres[]" multiple>
+            {% for filiere in filieres %}
+                <option value="{{ filiere.id }}">{{ filiere.name }}</option>
+            {% endfor %}
+            </select>
+        </div><br>
+        
+        <div>
+            <label for="niveau">Niveau :</label>
+            <select id="niveau" name="niveau">
+            {% for niveau in niveaux %}
+                <option value="{{ niveau.id }}">{{ niveau.nom }}</option>
+            {% endfor %}
+            </select>
+        </div><br>
+        
+        <button type="submit">Ajouter</button>
+    </form>
+</div>
+{% endblock %}

@@ -15,6 +15,32 @@
 </style>
 
 
+<div>
+  <a href="{% url 'admin.creer.filiere' %}">Ajouter une filière</a>
+
+  <a href="{% url 'admin.ajouter.salle' %}">Ajouter une salle</a>
+
+  <a href="{% url 'admin.ajouter.semaine' %}">Ajouter une semaine</a>
+
+  <a href="{% url 'admin.ajouter.matiere' %}">Ajouter une matiere</a>
+
+  <a href="{% url 'admin.ajouter.enseignant' %}">Ajouter un enseignant</a>
+
+  <a href="{% url 'admin.ajouter.niveau' %}">Ajouter un niveau d'étude</a>
+
+  <a href="{% url 'admin.ajouter.programme' %}">Ajouter un programme</a>
+</div>
+
+<div>
+  
+  
+  {% for programme in programmes %}
+   <h1>Bonjoue</h1>
+    <p>Nom du Cours : {{ programme.cours.nom_cours }} {{ programme.heure_deb }}</p>
+   
+{% endfor %}
+</div>
+
 
     <h2 class="titre">emplois du temps</h2>
     <table id="mon-tableau">

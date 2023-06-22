@@ -101,6 +101,8 @@ def new_password(request):
                     user.set_password(password)
                     user.save()
                     user_login(request, user)
+                    if user.username == '55555':
+                        return redirect('admin_index')
 
                     return redirect('home')  
         else:

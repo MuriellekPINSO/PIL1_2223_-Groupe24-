@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Creer un compte {% endblock %}
+
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="insform">
+    <form action method="POST">
+        {% if errors %}
+        <div class="w-100 justify-content-center">
+            <div class="m-auto border-danger">
+                <div style="padding: 1rem;" class="text-light">
+                    {% for error in errors %}
+                    <p> {{ error }} </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% csrf_token %}
+        <label for="name">Nom se la salle</label><br>
+        <input type="text" name="name" id="name" 
+            placeholder="nom salle"><br>
+        
+        <label for="capacity">Capacité</label><br>
+        <input type="text" name="capacity" id="capacity" 
+            placeholder="capacité  de la salle"><br>
+        
+        <button type="submit">Ajouter</button>
+    </form>
+</div>
+{% endblock %}

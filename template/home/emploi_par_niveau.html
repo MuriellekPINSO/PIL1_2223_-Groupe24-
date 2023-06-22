@@ -1,0 +1,91 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Creer un compte {% endblock %}
+
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-color: rgb(75, 69, 61);
+    }
+        #customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #e69494;}
+
+#customers tr{
+    background-color:#f2f2f2;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #95968a;
+  color: white;
+}
+
+.emploi-body{
+    margin: 4%;
+}
+.salle{
+    color: rgb(187, 82, 82);
+}
+
+</style>
+<div>
+    <h3>Emploi du temps Semaine {{ progra}}</h3>
+</div>
+<div class="emploi-body">
+    <table id="customers">
+  <tr>
+    <th>Lundi</th>
+    <th>Mardi</th>
+    <th>Mercredi</th>
+    <th>Jeudi</th>
+    <th>Vendredi</th>
+    <th>Samedi</th>
+  </tr>
+  <tr>
+    <td>{% for programme in programmes %}
+        
+            {% if programme.jour == "Lundi" %}
+            
+                <div class="programme-heure">
+                    <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
+                    <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                    <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                    </p>
+                </div>
+                
+            
+            {% endif %}
+
+        {% endfor %}
+    </td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+    <td>Germany</td>
+    <td>Germany</td>
+    <td>Germany</td>
+  </tr>
+
+</table>
+</div>
+
+<div class="insform">
+    
+    {% for programme in programmes %}
+
+    {% endfor %}
+</div>
+{% endblock %}

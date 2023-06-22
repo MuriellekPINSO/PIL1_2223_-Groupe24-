@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Creer un compte {% endblock %}
+
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="insform">
+    <h1>Ajouter semaine</h1>
+    <form action method="POST">
+        {% if errors %}
+        <div class="w-100 justify-content-center">
+            <div class="m-auto border-danger">
+                <div style="padding: 1rem;" class="text-light">
+                    {% for error in errors %}
+                    <p> {{ error }} </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% csrf_token %}
+        <label for="week-number">Neméro semaine</label><br>
+        <input type="text" name="week-number" id="week-number" 
+            placeholder=""><br>
+        
+        <label for="academic-year">Année scorlaire</label><br>
+        <input type="text" name="academic-year" id="academic-year" 
+            placeholder="2022-2023"><br>
+
+        <label for="date_debut">Date debut:</label><br>
+        <input type="date" id="date_debut" name="date_debut">
+
+        <label for="date_fin">Date fin:</label><br>
+        <input type="date" id="date_fin" name="date_fin">
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="publish" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+                Default radio
+        </label>
+        </div>
+            <div class="form-check">
+            <input class="form-check-input" type="radio" name="publish" id="flexRadioDefault2" checked>
+            <label class="form-check-label" for="flexRadioDefault2">
+                Default checked radio
+            </label>
+        </div>
+        
+        <button type="submit">Ajouter</button>
+    </form>
+</div>
+{% endblock %}

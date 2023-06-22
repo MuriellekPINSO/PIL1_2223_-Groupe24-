@@ -1,0 +1,51 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Creer un compte {% endblock %}
+
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
+    }
+</style>
+<div class="insform">
+    <form action method="POST">
+        {% if errors %}
+        <div class="w-100 justify-content-center">
+            <div class="m-auto border-danger">
+                <div style="padding: 1rem;" class="text-light">
+                    {% for error in errors %}
+                    <p> {{ error }} </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% csrf_token %}
+        <label for="name">Nom se la salle</label><br>
+        <input type="text" name="name" id="name" 
+            placeholder="nom matière"><br>
+
+        <div>
+            <label for="filiere">Spécialité :</label>
+            <select id="filiere" name="filiere">
+            {% for filiere in filieres %}
+                <option value="{{ filiere.id }}">{{ filiere.name }}</option>
+            {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label for="niveau">Niveau :</label>
+            <select id="niveau" name="niveau">
+            {% for niveau in niveaux %}
+                <option value="{{ niveau.id }}">{{ niveau.nom }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        
+        <button type="submit">Ajouter</button>
+    </form>
+</div>
+{% endblock %}
