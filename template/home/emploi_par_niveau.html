@@ -43,44 +43,120 @@
 
 </style>
 <div>
-    <h3>Emploi du temps Semaine {{ progra}}</h3>
+    <h3>Emploi du temps Semaine {{ derniere_semaine.nemuro_semaine }}</h3>
 </div>
-<div class="emploi-body">
-    <table id="customers">
-  <tr>
-    <th>Lundi</th>
-    <th>Mardi</th>
-    <th>Mercredi</th>
-    <th>Jeudi</th>
-    <th>Vendredi</th>
-    <th>Samedi</th>
-  </tr>
-  <tr>
-    <td>{% for programme in programmes %}
-        
-            {% if programme.jour == "Lundi" %}
-            
-                <div class="programme-heure">
-                    <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
-                    <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
-                    <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
-                    </p>
-                </div>
-                
-            
-            {% endif %}
+{% if error %}
+    <h3>{{ error }}</h3>
+{% else %}
+  <div class="emploi-body">
+      <table id="customers">
+    <tr>
+      <th>Lundi</th>
+      <th>Mardi</th>
+      <th>Mercredi</th>
+      <th>Jeudi</th>
+      <th>Vendredi</th>
+      <th>Samedi</th>
+    </tr>
+    <tr>
+      <td>{% for programme in programmes %}
+          
+              {% if programme.jour == "Lundi" %}
+              
+                  <div class="programme-heure">
+                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
+                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                      <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                      </p>
+                  </div>
+                  
+              
+              {% endif %}
 
-        {% endfor %}
-    </td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-    <td>Germany</td>
-    <td>Germany</td>
-    <td>Germany</td>
-  </tr>
+          {% endfor %}
+      </td>
+      <td>{% for programme in programmes %}
+          
+              {% if programme.jour == "Mardi" %}
+              
+                  <div class="programme-heure">
+                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
+                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                      <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                      </p>
+                  </div>
+                  
+              
+              {% endif %}
 
-</table>
-</div>
+          {% endfor %}</td>
+      <td>{% for programme in programmes %}
+          
+              {% if programme.jour == "Mercredi" %}
+              
+                  <div class="programme-heure">
+                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
+                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                      <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                      </p>
+                  </div>
+                  
+              
+              {% endif %}
+
+          {% endfor %}</td>
+      <td>{% for programme in programmes %}
+          
+              {% if programme.jour == "Jeudi" %}
+              
+                  <div class="programme-heure">
+                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
+                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                      <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                      </p>
+                  </div>
+                  
+              
+              {% endif %}
+
+          {% endfor %}</td>
+      <td>{% for programme in programmes  %}
+          
+              {% if programme.jour == "Vendredi" %}
+              
+                  <div class="programme-heure">
+                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
+                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                      <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                      </p>
+                  </div>
+                  
+              
+              {% endif %}
+
+          {% endfor %}</td>
+      <td>
+        {% for programme in programmes %}
+          
+              {% if programme.jour == "Samedi" %}
+              
+                  <div class="programme-heure">
+                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
+                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                      <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                      </p>
+                  </div>
+                  
+              
+              {% endif %}
+
+          {% endfor %}
+      </td>
+    </tr>
+
+  </table>
+  </div>
+{% endif %}
 
 <div class="insform">
     

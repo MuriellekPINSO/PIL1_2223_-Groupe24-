@@ -47,7 +47,7 @@ def niveau(request, pk):
     
 
 
-    return render(request, 'home/emploi_par_niveau.html', {"programmes" : programmes})
+    return render(request, 'home/emploi_par_niveau.html', {"programmes" : programmes, 'dernieresemaine' : derniere_semaine})
 
 @login_required()
 def admin_index(request):
@@ -255,6 +255,16 @@ def ajouterProgramme(request):
     salles = Salle.objects.all()
     niveaux = Niveau.objects.all()
     derniere_semaine = Semaine.objects.latest('id')
+
+    
+    derniere_semaine = Semaine.objects.filter(publich=1).latest('date_debut')
+
+    programmes = Programme.objects.filter(niveau=pk, semaine=derniere_semaine).order_by('heure_deb')
+    
+
+
+
+
 
     return render(request, 'home/ajouter_programme.html', {
         'filieres': filieres,
