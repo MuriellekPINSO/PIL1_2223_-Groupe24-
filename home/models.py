@@ -46,14 +46,15 @@ class Programme(models.Model):
     cours=models.ForeignKey(Cours,on_delete=models.CASCADE,  null=True)
     niveau=models.ForeignKey(Niveau,on_delete=models.CASCADE,  null=True)
     semaine=models.ForeignKey(Semaine,on_delete=models.CASCADE,  null=True)
+    enseignant = models.ForeignKey(Enseignant, on_delete=models.CASCADE, null=True)
+
     
     salle=models.ForeignKey(Salle,on_delete=models.CASCADE)
     jour=models.CharField(default = 'Lundi', max_length=20)
     heure_deb=models.IntegerField()
     heure_fin=models.IntegerField()
-    enseignant = models.ForeignKey(Enseignant, on_delete=models.CASCADE, null=True, default= Enseignant.objects.first)
+    #enseignant = models.ForeignKey(Enseignant, on_delete=models.CASCADE, null=True)
     
-
  
 
     
