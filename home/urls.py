@@ -15,4 +15,5 @@ urlpatterns = [
     path('administration/ajouter/programme', views.ajouterProgramme, name="admin.ajouter.programme"),
     path('administration/ajouter/programme/semaine/<int:pk>', views.ajouterProgramme, name="admin.ajouter.programme"),
     path('niveau/emploi/<int:pk>', views.niveau, name="emploi.niveau"),
+    path('programme/delete/<int:programme_id>', views.deleteProgramme, name="programme.delete"),
 ]

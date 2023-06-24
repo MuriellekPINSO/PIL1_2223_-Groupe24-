@@ -32,14 +32,22 @@ form {
 }
 
 button[type="submit"] {
-  align-self: flex-start;
+  align-self: flex-end;
 }
+
+.delete-botton {
+  margin-top: 3%;
+}
+
+
 
 
     .programme  {
         width: auto;
         height: auto;
-        margin: 10% 5% 10% 5%;
+        margin-top: 5%;
+        margin-left: 3%;
+        margin-right: 3%;
         font-size: 20px;
         color: rgb(168, 168, 243);
 }
@@ -329,7 +337,7 @@ button[type="submit"] {
                     <select id="niveau" name="niveau">
                     {% for niveau in niveaux %}
                     
-                        <option value="{{ niveau.id }}" {% if programme.niveau.id == niveau.id %} selected {% endif %}>{{ niveau.nom }} {{ niveau.id }}- {{ programme.niveau.id }}</option>
+                        <option value="{{ niveau.id }}" {% if programme.niveau.id == niveau.id %} selected {% endif %}>{{ niveau.nom }}</option>
                     {% endfor %}
                     </select>
 
@@ -339,12 +347,21 @@ button[type="submit"] {
                 <label for="filieres">Filière :</label><br>
                 <select id="filieres" name="filieres[]" class="select-multiple" multiple>
                 {% for filiere in filieres %}
-                    <option value="{{ filiere.id }}" {% if programme.filiere.id == filiere.id %}selected{% endif %}>{{ filiere.name }}</option>
+                    {% if filiere in programme.filieres.all %}
+                        <option value="{{ filiere.id }}" selected>{{ filiere.name }}</option>
+                    {% else %}
+                        <option value="{{ filiere.id }}">{{ filiere.name }}</option>
+                    {% endif %}
                 {% endfor %}
                 </select>
                 </div>
             </div>
             <button type="submit" form="form_{{ programme.id }}">Mofifier</button>
+        </form>
+
+        <form action="{% url 'programme.delete' programme.id %}" method="post" id="delete_{{ programme.id }}">
+        {% csrf_token %}
+            <button type="submit" form="delete_{{ programme.id }}" class="delete-botton">Supprimer</button>
         </form>
     </div>
     {% endfor %}

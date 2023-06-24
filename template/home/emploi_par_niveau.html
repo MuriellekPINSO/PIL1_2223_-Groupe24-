@@ -40,6 +40,14 @@
 .salle{
     color: rgb(187, 82, 82);
 }
+.heure {
+    font-size: 15px;
+    font-weight: bold;
+}
+.prof {
+    font-size: 15px;
+    font-weight: bold;
+}
 
 </style>
 <div>
@@ -64,9 +72,17 @@
               {% if programme.jour == "Lundi" %}
               
                   <div class="programme-heure">
-                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
-                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
-                      <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                      
+
+                      <p>
+                        <span class="heure">{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</span><br>
+                        <span>{{ programme.cours.nom_cours }}</span><br>
+                        {% for filiere in programme.filieres.all %}
+                            <span>{{ filiere.name }},</span><br>
+                        {% endfor%}
+
+                        <span class="prof">Prof: {{ programme.enseignant.nom }} {{ programme.enseignant.prenom }}</span><br>
+                        <span class="salle">Salle:{{ programme.salle.nom_Salle }}</span>
                       </p>
                   </div>
                   
@@ -80,9 +96,15 @@
               {% if programme.jour == "Mardi" %}
               
                   <div class="programme-heure">
-                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
-                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
-                      <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                       <p>
+                        <span class="heure">{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</span><br>
+                        <span>{{ programme.cours.nom_cours }}</span><br>
+                        {% for filiere in programme.filieres.all %}
+                            <span>{{ filiere.name }},</span><br>
+                        {% endfor%}
+
+                        <span class="prof">Prof: {{ programme.enseignant.nom }} {{ programme.enseignant.prenom }}</span><br>
+                        <span class="salle">Salle:{{ programme.salle.nom_Salle }}</span>
                       </p>
                   </div>
                   
@@ -95,9 +117,15 @@
               {% if programme.jour == "Mercredi" %}
               
                   <div class="programme-heure">
-                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
-                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
-                      <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
+                      <p>
+                        <span class="heure">{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</span><br>
+                        <span>{{ programme.cours.nom_cours }}</span><br>
+                        {% for filiere in programme.filieres.all %}
+                            <span>{{ filiere.name }},</span><br>
+                        {% endfor%}
+
+                        <span class="prof">Prof: {{ programme.enseignant.nom }} {{ programme.enseignant.prenom }}</span><br>
+                        <span class="salle">Salle:{{ programme.salle.nom_Salle }}</span>
                       </p>
                   </div>
                   
@@ -110,8 +138,14 @@
               {% if programme.jour == "Jeudi" %}
               
                   <div class="programme-heure">
-                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
-                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                       <p>
+                        <h5>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h5>
+                        <span>{{ programme.cours.nom_cours }}</span><br>
+                        {% for filiere in programme.filieres.all %}
+                            <span>{{ filiere.name }}</span><br>
+                        {% endfor%} 
+
+                        <span>Prof: {{ programme.enseignant.nom }} {{ programme.enseignant.prenom }}</span><br>
                       <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
                       </p>
                   </div>
@@ -125,8 +159,14 @@
               {% if programme.jour == "Vendredi" %}
               
                   <div class="programme-heure">
-                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
-                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                       <p>
+                        <h5>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h5>
+                        <span>{{ programme.cours.nom_cours }}</span><br>
+                        {% for filiere in programme.filieres.all %}
+                            <span>{{ filiere.name }}</span><br>
+                        {% endfor%} 
+
+                        <span>Prof: {{ programme.enseignant.nom }} {{ programme.enseignant.prenom }}</span><br>
                       <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
                       </p>
                   </div>
@@ -141,8 +181,14 @@
               {% if programme.jour == "Samedi" %}
               
                   <div class="programme-heure">
-                      <h3>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h3>
-                      <p>{{ programme.filiere.name }}  <br><span>{{ programme.cours.nom_cours }}</span><br>
+                       <p>
+                        <h5>{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</h5>
+                        <span>{{ programme.cours.nom_cours }}</span><br>
+                        {% for filiere in programme.filieres.all %}
+                            <span>{{ filiere.name }}</span><br>
+                        {% endfor%} <br>
+
+                        <span>Prof: {{ programme.enseignant.nom }} {{ programme.enseignant.prenom }}</span><br>
                       <span class="salle">Salle: {{ programme.salle.nom_Salle }}</span>
                       </p>
                   </div>

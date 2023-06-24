@@ -227,46 +227,54 @@ def ajouterProgramme(request, pk):
         programme_pk = request.POST.get('programme_pk')
 
         if heure_debut and heure_fin and jour and salle_id and enseignant_id and semaine_id and matiere_id and filieres_ids and niveau_id and jour:
+            
 
-            for filiere_id in filieres_ids:
-                try:
-                    filiere = Filiere.objects.get(pk=filiere_id)
-                    salle = Salle.objects.get(pk=salle_id)
-                    semaine = Semaine.objects.get(pk=semaine_id)
-                    cours = Cours.objects.get(pk=matiere_id)
-                    niveau = Niveau.objects.get(pk=niveau_id)
+            try:
+                salle = Salle.objects.get(pk=salle_id)
+                semaine = Semaine.objects.get(pk=semaine_id)
+                cours = Cours.objects.get(pk=matiere_id)
+                niveau = Niveau.objects.get(pk=niveau_id)
+                enseignant = Enseignant.objects.get(pk=enseignant_id)
 
-                    if programme_pk is None:
-                        ensaignant = Programme.objects.create(
+                if programme_pk is None:
+                    programme = Programme.objects.create(
                             niveau=niveau,
                             cours=cours,
                             salle=salle,
                             semaine=semaine,
-                            filiere=filiere,
                             heure_deb=heure_debut,
                             heure_fin=heure_fin,
-                            jour=jour
-                        )
+                            jour=jour,
+                            enseignant = enseignant
+                            
+                    )
+
+                    programme.filieres.set(filieres_ids)
+
+                        
                     
-                    else: 
-                        programme = Programme.objects.get(pk = programme_pk)
+                else: 
+                    programme = Programme.objects.get(pk = programme_pk)
 
-                        programme.niveau = niveau
-                        programme.cours = cours
-                        programme.salle = salle
-                        programme.semaine = semaine
-                        programme.filiere = filiere
-                        programme.heure_deb = heure_debut
-                        programme.heure_fin = heure_fin
-                        programme.jour = jour
+                    programme.niveau = niveau
+                    programme.cours = cours
+                    programme.salle = salle
+                    programme.semaine = semaine
+                    programme.heure_deb = heure_debut
+                    programme.heure_fin = heure_fin
+                    programme.jour = jour
+                    programme.enseignant = enseignant
 
-                        programme.save()
+                    programme.filieres.set(filieres_ids)
+
+                    programme.save()
 
 
-                except (Filiere.DoesNotExist, Salle.DoesNotExist, Semaine.DoesNotExist, Cours.DoesNotExist, Niveau.DoesNotExist):
+            except (Filiere.DoesNotExist, Salle.DoesNotExist, Semaine.DoesNotExist, Cours.DoesNotExist, Niveau.DoesNotExist):
                     # Gérer les erreurs si les objets n'existent pas
                     pass
             return redirect('admin.ajouter.programme', pk=pk) 
+            
         else:
             errors.append('Remplissez tous les champs')
 
@@ -298,3 +306,22 @@ def ajouterProgramme(request, pk):
         'errors': errors,
         'semaine' : pk
     })
+
+
+
+
+from django.shortcuts import get_object_or_404
+
+@login_required
+def deleteProgramme(request, programme_id):
+    errors = []
+
+    try:
+        programme = get_object_or_404(Programme, pk=programme_id)
+        programme.delete()
+    except Programme.DoesNotExist:
+        errors.append('Le programme spécifié n\'existe pas')
+    except Exception as e:
+        errors.append('Une erreur s\'est produite lors de la suppression ')
+
+    return redirect(request.META.get('HTTP_REFERER'))
