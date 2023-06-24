@@ -52,9 +52,10 @@ def niveau(request, pk):
 @login_required()
 def admin_index(request):
 
-    programmes = Programme.objects.all()
+    semaines = Semaine.objects.all().order_by('-nemuro_semaine')
 
-    return render(request, 'home/admi.html', {'programmes' : programmes})
+
+    return render(request, 'home/admi.html', {'semaines' : semaines})
 
 @login_required()
 def creer_filiere(request):
@@ -109,7 +110,8 @@ def ajouterSemaine(request):
         nom_salle = request.POST.get('week-number')
         capacite = request.POST.get('academic-year')
         date_debut = datetime.strptime(request.POST['date_debut'], '%Y-%m-%d').date()
-        date_fin = datetime.strptime(request.POST['date_fin'], '%Y-%m-%d').date()
+        date_fin = datetime.strptime(request.POST['date_fin'], '%Y-%m-%d').date(),
+        publich = bool  
 
         if nom_salle and capacite and date_debut and date_fin:
             if date_fin > date_debut:
@@ -208,7 +210,8 @@ def ajouterNiveau(request):
 
 
 @login_required()
-def ajouterProgramme(request):
+
+def ajouterProgramme(request, pk):
     errors = []
     
     if request.method == 'POST':
@@ -220,9 +223,10 @@ def ajouterProgramme(request):
         matiere_id = request.POST.get('matiere')
         filieres_ids = request.POST.getlist('filieres[]')
         niveau_id = request.POST.get('niveau')
+        enseignant_id = request.POST.get('enseignant')
+        programme_pk = request.POST.get('programme_pk')
 
-        if heure_debut and heure_fin and jour and salle_id and semaine_id and matiere_id and filieres_ids and niveau_id and jour:
-            # Tous les champs requis sont présents
+        if heure_debut and heure_fin and jour and salle_id and enseignant_id and semaine_id and matiere_id and filieres_ids and niveau_id and jour:
 
             for filiere_id in filieres_ids:
                 try:
@@ -232,20 +236,37 @@ def ajouterProgramme(request):
                     cours = Cours.objects.get(pk=matiere_id)
                     niveau = Niveau.objects.get(pk=niveau_id)
 
-                    ensaignant = Programme.objects.create(
-                        niveau=niveau,
-                        cours=cours,
-                        salle=salle,
-                        semaine=semaine,
-                        filiere=filiere,
-                        heure_deb=heure_debut,
-                        heure_fin=heure_fin,
-                        jour=jour
-                    )
+                    if programme_pk is None:
+                        ensaignant = Programme.objects.create(
+                            niveau=niveau,
+                            cours=cours,
+                            salle=salle,
+                            semaine=semaine,
+                            filiere=filiere,
+                            heure_deb=heure_debut,
+                            heure_fin=heure_fin,
+                            jour=jour
+                        )
+                    
+                    else: 
+                        programme = Programme.objects.get(pk = programme_pk)
+
+                        programme.niveau = niveau
+                        programme.cours = cours
+                        programme.salle = salle
+                        programme.semaine = semaine
+                        programme.filiere = filiere
+                        programme.heure_deb = heure_debut
+                        programme.heure_fin = heure_fin
+                        programme.jour = jour
+
+                        programme.save()
+
+
                 except (Filiere.DoesNotExist, Salle.DoesNotExist, Semaine.DoesNotExist, Cours.DoesNotExist, Niveau.DoesNotExist):
                     # Gérer les erreurs si les objets n'existent pas
                     pass
-            return redirect('admin_index') 
+            return redirect('admin.ajouter.programme', pk=pk) 
         else:
             errors.append('Remplissez tous les champs')
 
@@ -254,16 +275,15 @@ def ajouterProgramme(request):
     semaines = Semaine.objects.all()
     salles = Salle.objects.all()
     niveaux = Niveau.objects.all()
+    enseignants = Enseignant.objects.all()
     derniere_semaine = Semaine.objects.latest('id')
 
     
     derniere_semaine = Semaine.objects.filter(publich=1).latest('date_debut')
 
-    programmes = Programme.objects.filter(niveau=pk, semaine=derniere_semaine).order_by('heure_deb')
+
+    programmes = Programme.objects.filter(semaine=pk)
     
-
-
-
 
 
     return render(request, 'home/ajouter_programme.html', {
@@ -272,6 +292,9 @@ def ajouterProgramme(request):
         'semaines': semaines,
         'salles': salles,
         'niveaux': niveaux,
+        'enseignants' : enseignants,
         'semaineActuelle': derniere_semaine,
-        'errors': errors
+        'programmes' : programmes,
+        'errors': errors,
+        'semaine' : pk
     })

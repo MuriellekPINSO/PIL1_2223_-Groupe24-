@@ -8,92 +8,347 @@
         background-image: url('/static/img/bg-auth.jpg');
         background-size: cover;
     }
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  flex: 1; 
+}
+
+.sidebar {
+  flex: 1; 
+  margin-top: 10%;
+}
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+button[type="submit"] {
+  align-self: flex-start;
+}
+
+
+    .programme  {
+        width: auto;
+        height: auto;
+        margin: 10% 5% 10% 5%;
+        font-size: 20px;
+        color: rgb(168, 168, 243);
+}
+
+.programme button {
+    height: 40px;
+    width: 95px;
+    background-image: linear-gradient(to left, #e66465, #9198e5);
+    border-radius: 8px;
+}
+.programme form input {
+    width: 300px;
+    height: 35px;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+.programme form select {
+    width: 300px;
+    height: 35px;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+
+.select-multiple {
+    width: 300px;
+    height: 75px !important;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+
+
 </style>
-<div class="insform">
-    <form action method="POST">
+    <div class="programme">
         {% if errors %}
-        <div class="w-100 justify-content-center">
-            <div class="m-auto border-danger">
-                <div style="padding: 1rem;" class="text-light">
-                    {% for error in errors %}
-                    <p> {{ error }} </p>
-                    {% endfor %}
+            <div class="w-100 justify-content-center">
+                <div class="m-auto border-danger">
+                    <div style="padding: 1rem;" class="text-light">
+                        {% for error in errors %}
+                        <p> {{ error }} </p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endif %}
-        {% csrf_token %}
-        <label for="heure_debut">Heure debut</label><br>
-        <input type="text" name="heure_debut" id="heure_debut" 
-            placeholder="14 "><br>
+            {% endif %}
 
-        <label for="heure_fin">Heure fin</label><br>
-        <input type="text" name="heure_fin" id="heure_fin" 
-            placeholder="18 "><br><br>
-
-
-        <div>
-            <label for="jour">Jour :</label>
-            <select id="jour" name="jour">
+        {% if successfull %}
+            <div class="w-100 justify-content-center">
+                <div class="m-auto border-danger">
+                    <div style="padding: 1rem;" class="text-light">
+                        {% for success in successfull %}
+                        <p> {{ success }} </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        <form action method="POST" id="ajout">
             
-                <option value="Lundi">Lundi</option>
-                <option value="Mardi">Mardi</option>
-                <option value="Mercredi">Mercredi</option>
-                <option value="Jeudi">Jeudi</option>
-                <option value="Vendredi">Vendredi</option>
-                <option value="Samedi">Samedi</option>
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="heure_debut">Heure debut:</label><br>
+
+                    <select id="heure_debut" name="heure_debut">
+                            <option value="7">7h</option>
+                            <option value="8">8h</option>
+                            <option value="9">9h</option>
+                            <option value="10">10h</option>
+                            <option value="11">11h</option>
+                            <option value="11">12h</option>
+                            <option value="13">13h</option>
+                            <option value="14">14h</option>
+                            <option value="15">15h</option>
+                            <option value="16">16h</option>
+                            <option value="17">17h</option>
+                            <option value="18">18h</option>
+                            <option value="19">19h</option>
+                            <option value="20">20h</option>         
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="heure_fin">Heure fin:</label><br>
+                    <select id="heure_fin" name="heure_fin">
+                            <option value="7">7h</option>
+                            <option value="8">8h</option>
+                            <option value="9">9h</option>
+                            <option value="10">10h</option>
+                            <option value="11">11h</option>
+                            <option value="11">12h</option>
+                            <option value="13">13h</option>
+                            <option value="14">14h</option>
+                            <option value="15">15h</option>
+                            <option value="16">16h</option>
+                            <option value="17">17h</option>
+                            <option value="18">18h</option>
+                            <option value="19">19h</option>
+                            <option value="20">20h</option>         
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="jour">Jour :</label><br>
+                    <select id="jour" name="jour">
+                    
+                        <option value="Lundi">Lundi</option>
+                        <option value="Mardi">Mardi</option>
+                        <option value="Mercredi">Mercredi</option>
+                        <option value="Jeudi">Jeudi</option>
+                        <option value="Vendredi">Vendredi</option>
+                        <option value="Samedi">Samedi</option>
+                    
+                    </select>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="salle">Salle :</label><br>
+                    <select id="salle" name="salle">
+                    {% for salle in salles %}
+                        <option value="{{ salle.id }}">{{ salle.nom_Salle }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <input type="hidden" name="semaine" value="{{ semaine }}">
+
+
+            <div class="row">
+    
+                <div class="form-group">
+                    <label for="matiere">Metière :</label><br>
+                    <select id="matiere" name="matiere">
+                    {% for matiere in matieres %}
+                        <option value="{{ matiere.id }}" >{{ matiere.nom_cours }} </option>
+                    {% endfor %}
+                    </select>
+                </div>    
+
+                
+                <div class="form-group">
+                    <label for="enseignant">Ensignant :</label><br>
+                    <select id="enseignant" name="enseignant">
+                    {% for enseignant in enseignants %}
+                        <option value="{{ enseignant.id }}" >{{ enseignant.nom }} {{ enseignant.prenom }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="niveau">Niveau :</label><br>
+                    <select id="niveau" name="niveau">
+                    {% for niveau in niveaux %}
+                        <option value="{{ niveau.id }}">{{ niveau.nom }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+
+                <div class="select-multiple form-group">
+                <label for="filieres">Filière :</label><br>
+                <select id="filieres" name="filieres[]" class="select-multiple" multiple>
+                {% for filiere in filieres %}
+                    <option value="{{ filiere.id }}">{{ filiere.name }}</option>
+                {% endfor %}
+                </select>
+                </div>
+            </div>
+        
+
             
-            </select>
-        </div><br>
+            <button type="submit" form="ajout">Ajouter</button>
+        </form>
+    </div>
 
-        <div>
-            <label for="salle">Salle :</label>
-            <select id="salle" name="salle">
-            {% for salle in salles %}
-                <option value="{{ salle.id }}">{{ salle.nom_Salle }}</option>
-            {% endfor %}
-            </select>
-        </div><br>
 
-        
+    {% for programme in programmes %}
+        <div class="programme">
+        <form action method="POST" id="form_{{ programme.id }}">
+            
+            {% csrf_token %}
 
-        <div>
-            <label for="semaine">Semaine :</label>
-            <select id="semaine" name="semaine">
-            {% for semaine in semaines %}
-                <option value="{{ semaine.id }}" {% if semaine.id == semaineActuelle.id   %} selected {% endif %}  >{{ semaine.nemuro_semaine }}</option>
-            {% endfor %}
-            </select>
-        </div><br>
-        
-        <div>
-            <label for="matiere">Metière :</label>
-            <select id="matiere" name="matiere">
-            {% for matiere in matieres %}
-                <option value="{{ matiere.id }}" >{{ matiere.nom_cours }}</option>
-            {% endfor %}
-            </select>
-        </div><br>
-        
-        <div>
-            <label for="filieres">Filière :</label>
-            <select id="filieres" name="filieres[]" multiple>
-            {% for filiere in filieres %}
-                <option value="{{ filiere.id }}">{{ filiere.name }}</option>
-            {% endfor %}
-            </select>
-        </div><br>
-        
-        <div>
-            <label for="niveau">Niveau :</label>
-            <select id="niveau" name="niveau">
-            {% for niveau in niveaux %}
-                <option value="{{ niveau.id }}">{{ niveau.nom }}</option>
-            {% endfor %}
-            </select>
-        </div><br>
-        
-        <button type="submit">Ajouter</button>
-    </form>
-</div>
+            <div class="row">
+                <div class="form-group">
+                    <label for="heure_debut">Heure debut:</label><br>
+
+                    <select id="heure_debut" name="heure_debut">
+                            <option value="7" {% if programme.heure_deb == 7 %}selected{% endif %}>7h</option>
+                            <option value="8" {% if programme.heure_deb == 8 %}selected{% endif %}>8h</option>
+                            <option value="9" {% if programme.heure_deb == 9 %}selected{% endif %}>9h</option>
+                            <option value="10" {% if programme.heure_deb == 10 %}selected{% endif %}>10h</option>
+                            <option value="11" {% if programme.heure_deb == 11 %}selected{% endif %}>11h</option>
+                            <option value="11" {% if programme.heure_deb == 12 %}selected{% endif %}>12h</option>
+                            <option value="13" {% if programme.heure_deb == 13 %}selected{% endif %}>13h</option>
+                            <option value="14" {% if programme.heure_deb == 14 %}selected{% endif %}>14h</option>
+                            <option value="15" {% if programme.heure_deb == 15 %}selected{% endif %}>15h</option>
+                            <option value="16" {% if programme.heure_deb == 16 %}selected{% endif %}>16h</option>
+                            <option value="17" {% if programme.heure_deb == 17 %}selected{% endif %}>17h</option>
+                            <option value="18" {% if programme.heure_deb == 18 %}selected{% endif %}>18h</option>
+                            <option value="19" {% if programme.heure_deb == 19 %}selected{% endif %}>19h</option>
+                            <option value="20" {% if programme.heure_deb == 20 %}selected{% endif %}>20h</option>         
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="heure_fin">Heure fin:</label><br>
+                    <select id="heure_fin" name="heure_fin">
+                            <option value="7" {% if programme.heure_fin == 7 %}selected{% endif %}>7h</option>
+                            <option value="8" {% if programme.heure_fin == 8 %}selected{% endif %}>8h</option>
+                            <option value="9" {% if programme.heure_fin == 9 %}selected{% endif %}>9h</option>
+                            <option value="10" {% if programme.heure_fin == 10 %}selected{% endif %}>10h</option>
+                            <option value="11" {% if programme.heure_fin == 11 %}selected{% endif %}>11h</option>
+                            <option value="11" {% if programme.heure_fin == 12 %}selected{% endif %}>12h</option>
+                            <option value="13" {% if programme.heure_fin == 13 %}selected{% endif %}>13h</option>
+                            <option value="14" {% if programme.heure_fin == 14 %}selected{% endif %}>14h</option>
+                            <option value="15" {% if programme.heure_fin == 15 %}selected{% endif %}>15h</option>
+                            <option value="16" {% if programme.heure_fin == 16 %}selected{% endif %}>16h</option>
+                            <option value="17" {% if programme.heure_fin == 17 %}selected{% endif %}>17h</option>
+                            <option value="18" {% if programme.heure_fin == 18 %}selected{% endif %}>18h</option>
+                            <option value="19" {% if programme.heure_fin == 19 %}selected{% endif %}>19h</option>
+                            <option value="20" {% if programme.heure_fin == 20 %}selected{% endif %}>20h</option>         
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="jour">Jour :</label><br>
+                    <select id="jour" name="jour">
+                    
+                        <option value="Lundi" {% if programme.jour == "Lundi" %}selected{% endif %}>Lundi</option>
+                        <option value="Mardi" {% if programme.jour == "Mardi" %}selected{% endif %}>Mardi</option>
+                        <option value="Mercredi" {% if programme.jour == "Mercredi" %}selected{% endif %}>Mercredi</option>
+                        <option value="Jeudi" {% if programme.jour == "Jeudi" %}selected{% endif %}>Jeudi</option>
+                        <option value="Vendredi" {% if programme.jour == "Vendredi" %}selected{% endif %}>Vendredi</option>
+                        <option value="Samedi" {% if programme.jour == "Samedi" %}selected{% endif %}>Samedi</option>
+                    
+                    </select>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="salle">Salle :</label><br>
+                    <select id="salle" name="salle">
+                    {% for salle in salles %}
+                        <option value="{{ salle.id }}" {% if programme.salle.id == salle.id %}selected{% endif %}>{{ salle.nom_Salle }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <input type="hidden" name="semaine" value="{{ semaine }}">
+            <input type="hidden" name="programme_pk" id="programme_pk" value="{{programme.id}}">
+
+
+            <div class="row">
+    
+                <div class="form-group">
+                    <label for="matiere">Metière :</label><br>
+                    <select id="matiere" name="matiere">
+                    {% for matiere in matieres %}
+                        <option value="{{ matiere.id }}" {% if programme.cours.id ==  matiere.id %}selected{% endif %}>{{ matiere.nom_cours }} </option>
+                    {% endfor %}
+                    </select>
+                </div>    
+
+                
+                <div class="form-group">
+                    <label for="enseignant">Ensignant :</label><br>
+                    <select id="enseignant" name="enseignant">
+                    {% for enseignant in enseignants %}
+                        <option value="{{ enseignant.id }}" {% if programme.enseignant.id == enseignant.id %}selected{% endif %}>{{ enseignant.nom }} {{ enseignant.prenom }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="niveau">Niveau :</label><br>
+                    <select id="niveau" name="niveau">
+                    {% for niveau in niveaux %}
+                    
+                        <option value="{{ niveau.id }}" {% if programme.niveau.id == niveau.id %} selected {% endif %}>{{ niveau.nom }} {{ niveau.id }}- {{ programme.niveau.id }}</option>
+                    {% endfor %}
+                    </select>
+
+                </div>
+
+                <div class="select-multiple form-group">
+                <label for="filieres">Filière :</label><br>
+                <select id="filieres" name="filieres[]" class="select-multiple" multiple>
+                {% for filiere in filieres %}
+                    <option value="{{ filiere.id }}" {% if programme.filiere.id == filiere.id %}selected{% endif %}>{{ filiere.name }}</option>
+                {% endfor %}
+                </select>
+                </div>
+            </div>
+            <button type="submit" form="form_{{ programme.id }}">Mofifier</button>
+        </form>
+    </div>
+    {% endfor %}
+
+
+
 {% endblock %}

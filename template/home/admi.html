@@ -32,13 +32,37 @@
 </div>
 
 <div>
+<div>
+  <li class="deroulant"><a href>Master&ensp;</a>
+  <ul class="sous">
+    <li><a href="">bonjour</a></li>
+    {% for semaine in semaines %}
+    <li><a href="{% url 'master' semaine.id %}">Semaine {{ nemuro_semaine }} </a></li>
+    {% endfor %}
+  </ul>
+</li>
+
+<nav class="after-auth" style="display: none;">
+        <ul>
+            <li class="deroulant"><a href>Ajouter programme&ensp;</a>
+              <ul class="sous">
+              {% for semaine in semaines %}
+                <li><a href="{% url 'admin.ajouter.programme' semaine.id  %}">Semaine {{ semaine.nemuro_semaine }} </a></li>
+              {% endfor %}
+              </ul>
+            </li>
+            <li class="deroulant"><a href>Licence &ensp;</a>
+                <ul class="sous">
+                    <li><a href="{% url 'licence' 1 %}">Licence1</a></li>
+                    <li><a href="{% url 'licence' 2 %}">Licence2</a></li>
+                    <li><a href="{% url 'licence' 3 %}">Licence3</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
   
-  
-  {% for programme in programmes %}
-   <h1>Bonjoue</h1>
-    <p>Nom du Cours : {{ programme.cours.nom_cours }} {{ programme.heure_deb }}</p>
-   
-{% endfor %}
+
 </div>
 
 
