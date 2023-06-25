@@ -15,35 +15,25 @@
 </style>
 
 
-<div>
-  <a href="{% url 'admin.creer.filiere' %}">Ajouter une filière</a>
 
-  <a href="{% url 'admin.ajouter.salle' %}">Ajouter une salle</a>
-
-  <a href="{% url 'admin.ajouter.semaine' %}">Ajouter une semaine</a>
-
-  <a href="{% url 'admin.ajouter.matiere' %}">Ajouter une matiere</a>
-
-  <a href="{% url 'admin.ajouter.enseignant' %}">Ajouter un enseignant</a>
-
-  <a href="{% url 'admin.ajouter.niveau' %}">Ajouter un niveau d'étude</a>
-
-  <a href="{% url 'admin.ajouter.programme' %}">Ajouter un programme</a>
-</div>
-
-<div>
-<div>
-  <li class="deroulant"><a href>Master&ensp;</a>
-  <ul class="sous">
-    <li><a href="">bonjour</a></li>
-    {% for semaine in semaines %}
-    <li><a href="{% url 'master' semaine.id %}">Semaine {{ nemuro_semaine }} </a></li>
-    {% endfor %}
-  </ul>
-</li>
 
 <nav class="after-auth" style="display: none;">
         <ul>
+          <li class="deroulant"><a href>Liste &ensp;</a>
+                <ul class="sous">
+                    <li><a href="{% url 'admin.liste.semaine' %}">Semaines</a></li>
+                </ul>
+            </li>
+            <li class="deroulant"><a href>Autres actions &ensp;</a>
+                <ul class="sous">
+                    <li><a href="{% url 'admin.ajouter.semaine' %}">Ajouter une semaine</a></li>
+                    <li><a href="{% url 'admin.creer.filiere' %}">Ajouter une filière</a></li>
+                    <li><a href="{% url 'admin.ajouter.salle' %}">Ajouter une salle</a></li>
+                    <li><a href="{% url 'admin.ajouter.matiere' %}">Ajouter une matiere</a></li>
+                    <li><a href="{% url 'admin.ajouter.enseignant' %}">Ajouter un enseignant</a></li>
+                    <li><a href="{% url 'admin.ajouter.niveau' %}">Ajouter un niveau d'étude</a></li>
+                </ul>
+            </li>
             <li class="deroulant"><a href>Ajouter programme&ensp;</a>
               <ul class="sous">
               {% for semaine in semaines %}
@@ -51,13 +41,7 @@
               {% endfor %}
               </ul>
             </li>
-            <li class="deroulant"><a href>Licence &ensp;</a>
-                <ul class="sous">
-                    <li><a href="{% url 'licence' 1 %}">Licence1</a></li>
-                    <li><a href="{% url 'licence' 2 %}">Licence2</a></li>
-                    <li><a href="{% url 'licence' 3 %}">Licence3</a></li>
-                </ul>
-            </li>
+            
         </ul>
     </nav>
 </div>

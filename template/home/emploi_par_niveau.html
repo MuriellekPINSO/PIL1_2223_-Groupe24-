@@ -3,9 +3,11 @@
 {% block 'title' %} Emploi par niveau {% endblock %}
 
 {% block 'main' %}
+
 <style>
     .bg-auth {
-        background-color: rgb(75, 69, 61);
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
     }
         #customers {
   font-family: Arial, Helvetica, sans-serif;
@@ -48,10 +50,15 @@
     font-size: 15px;
     font-weight: bold;
 }
+.emploi-titre{
+    text-align: center;
+    color: white;
+    margin-top: 3%;
+}
 
 </style>
-<div>
-    <h3>Emploi du temps Semaine {{ derniere_semaine.nemuro_semaine }}</h3>
+<div class="emploi-titre">
+    <h3>Emploi du temps du {{ dernieresemaine.date_debut }} au {{ dernieresemaine.date_fin }} Semaine {{ dernieresemaine.nemuro_semaine }} <br>{{niveau.nom}}</h3>
 </div>
 {% if error %}
     <h3>{{ error }}</h3>
@@ -75,7 +82,7 @@
                       
 
                       <p>
-                        <span class="heure">{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</span><br>
+                        <span class="heure">{{ programme.heure_deb}}h - {{ programme.heure_fin }}h</span>
                         <span>{{ programme.cours.nom_cours }}</span><br>
                         {% for filiere in programme.filieres.all %}
                             <span>{{ filiere.name }},</span><br>

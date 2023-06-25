@@ -9,11 +9,19 @@
         background-size: cover;
     }
 </style>
+
 <p>
-    {% for niveau in niveaux %}
-        <a href="{% url 'emploi.niveau' niveau.id %}">{{ niveau.nom }}</a>
-    {% endfor %}
-    <h1 class="text-light">Bienvenu {{ user.first_name }} {{ user.last_name }} </h1>
+<!-- 
+    <li class="deroulant"><a href>Ajouter programme&ensp;</a>
+        <ul class="sous">
+            {% for niveau in niveaux %}
+                <li><a href="{% url 'emploi.niveau' niveau.id %}">Semaine {{ niveau.non }} </a></li>
+            {% endfor %}
+        </ul>
+    </li>
+-->
+
+
 <h1 style="color: white; text-transform: uppercase; text-align: center; transform: translateY(140%);">Acceder à
     votre espace d'observation <br>de l'emploie du temps en vous reférant <br> à la barre de navigation</h1>
 </p>

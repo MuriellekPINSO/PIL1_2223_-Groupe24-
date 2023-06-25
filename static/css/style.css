@@ -465,3 +465,11 @@ nav ul li .acti {
   color: white;
 }
 
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+}

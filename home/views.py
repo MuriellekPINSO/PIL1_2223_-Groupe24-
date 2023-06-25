@@ -43,19 +43,30 @@ def niveau(request, pk):
 
     derniere_semaine = Semaine.objects.filter(publich=1).latest('date_debut')
 
-    programmes = Programme.objects.filter(niveau=pk, semaine=derniere_semaine).order_by('heure_deb')
+    programmes = Programme.objects.filter(niveau=pk, semaine=derniere_semaine.id).order_by('heure_deb')
+
+    niveaux = Niveau.objects.all()
+    niveau = Niveau.objects.get(pk=pk)
+
+    context = {
+        "programmes" : programmes,
+        'dernieresemaine' : derniere_semaine,
+        'niveaux' : niveaux,
+        'niveau' : niveau
+        }
     
 
 
-    return render(request, 'home/emploi_par_niveau.html', {"programmes" : programmes, 'dernieresemaine' : derniere_semaine})
+    return render(request, 'home/emploi_par_niveau.html', context)
 
 @login_required()
 def admin_index(request):
 
     semaines = Semaine.objects.all().order_by('-nemuro_semaine')
+    niveaux = Niveau.objects.all()
 
 
-    return render(request, 'home/admi.html', {'semaines' : semaines})
+    return render(request, 'home/admi.html', {'semaines' : semaines, 'niveaux' : niveaux})
 
 @login_required()
 def creer_filiere(request):
@@ -107,15 +118,15 @@ def ajouterSemaine(request):
 
     errors = []  
     if request.method == 'POST':
-        nom_salle = request.POST.get('week-number')
-        capacite = request.POST.get('academic-year')
+        numero = request.POST.get('week-number')
+        annee = request.POST.get('academic-year')
         date_debut = datetime.strptime(request.POST['date_debut'], '%Y-%m-%d').date()
-        date_fin = datetime.strptime(request.POST['date_fin'], '%Y-%m-%d').date(),
-        publich = bool  
+        date_fin = datetime.strptime(request.POST['date_fin'], '%Y-%m-%d').date()
+        publich = request.POST.get('publish')  
 
-        if nom_salle and capacite and date_debut and date_fin:
+        if numero and annee and date_debut and date_fin:
             if date_fin > date_debut:
-                semaine = Semaine.objects.create(nemuro_semaine=nom_salle, annee_scolaire=capacite, date_debut=date_debut, date_fin=date_fin)
+                semaine = Semaine.objects.create(nemuro_semaine=numero, annee_scolaire=annee, date_debut=date_debut, date_fin=date_fin, publich = publich)
                 return redirect('admin_index')  
             else:
                 errors.append("La date fin doit etre supérieure à la date debut") 
@@ -287,7 +298,7 @@ def ajouterProgramme(request, pk):
     derniere_semaine = Semaine.objects.latest('id')
 
     
-    derniere_semaine = Semaine.objects.filter(publich=1).latest('date_debut')
+    derniere_semaine = Semaine.objects.filter(publich=0).latest('date_debut')
 
 
     programmes = Programme.objects.filter(semaine=pk)
@@ -322,6 +333,74 @@ def deleteProgramme(request, programme_id):
     except Programme.DoesNotExist:
         errors.append('Le programme spécifié n\'existe pas')
     except Exception as e:
+        errors.append('Une erreur s\'est produite lors de la suppression ')
+
+    return redirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
+def listeSemaines(request):
+    semaines = Semaine.objects.all().order_by('-id')
+
+    return render(request, 'home/liste_semaine.html', {
+        'semaines': semaines,
+
+    })
+
+@login_required
+def modifierSemaine(request, semaine_id):
+
+    errors = []
+    if request.method == 'POST':
+        numero = request.POST.get('week-number')
+        annee = request.POST.get('academic-year')
+        date_debut = request.POST.get('date_debut')
+        date_fin = request.POST.get('date_fin')
+        publich = request.POST.get('publish') 
+
+        if numero and annee and date_debut and date_fin and publich:
+
+            try:
+                semaine = Semaine.objects.get(pk = semaine_id)
+
+                semaine.nemuro_semaine = numero
+                semaine.annee_scolaire = annee
+                semaine.date_debut = date_debut
+                semaine.date_fin = date_fin
+                semaine.publich = publich
+
+                semaine.save()
+        
+    
+            except Semaine.DoesNotExist:
+
+                errors.append('Une erreure s\'est produite lors de la mise à jour')
+            
+            return redirect('admin.modifier.semaine', semaine_id) 
+
+        else: 
+
+            errors.append('Remplissez tous les champs pour modifier la semaine')   
+           
+
+    semaines = Semaine.objects.all().order_by('-id')
+
+    return render(request, 'home/liste_semaine.html', {
+        'semaines': semaines,
+        'errors' : errors
+        
+    })
+
+@login_required
+def deleteSemaine(request, semaine_id):
+    errors = []
+
+    try:
+        semaine = get_object_or_404(Semaine, pk=semaine_id)
+        semaine.delete()
+    except Programme.DoesNotExist:
+        errors.append('Le programme spécifié n\'existe pas')
+    except Exception :
         errors.append('Une erreur s\'est produite lors de la suppression ')
 
     return redirect(request.META.get('HTTP_REFERER'))

@@ -1,0 +1,128 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Creer un compte {% endblock %}
+
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
+    }
+
+    .row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+}
+    .semaine  {
+        width: auto;
+        height: auto;
+        margin-top: 5%;
+        margin-left: 3%;
+        margin-right: 3%;
+        font-size: 20px;
+        color: rgb(168, 168, 243);
+}
+
+.semaine button {
+    height: 40px;
+    width: 95px;
+    background-image: linear-gradient(to left, #e66465, #9198e5);
+    border-radius: 8px;
+}
+.semaine form input {
+    width: 300px;
+    height: 35px;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+</style>
+
+    <h1>Liste semaines</h1>
+
+    {% if errors %}
+            <div class="w-100 justify-content-center">
+                <div class="m-auto border-danger">
+                    <div style="padding: 1rem;" class="text-light">
+                        {% for error in errors %}
+                        <p> {{ error }} </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+    {% if success %}
+            <div class="w-100 justify-content-center">
+                <div class="m-auto border-success">
+                    <div style="padding: 1rem;" class="text-light">
+                        <p> {{ error }} </p>
+                      
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+    
+    {% for semaine in semaines %}
+        <div class="semaine">
+            <form action = "{% url 'admin.modifier.semaine' semaine.id %}" method="POST", id="form_{{ semaine.id }}" >
+            
+            {% csrf_token %}
+                <div class="row">
+                    <div class="form-group">
+                        <label for="week-number">Numéro: {{ semaine.nemuro_semaine }}</label><br>
+                        <input type="text" name="week-number" id="week-number" 
+                        placeholder="" value="{{ semaine.nemuro_semaine }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="academic-year">Année scorlaire: {{ semaine.annee_scolaire }}</label><br>
+                        <input type="text" name="academic-year" id="academic-year" 
+                        placeholder="2022-2023" value="{{ semaine.annee_scolaire }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date_debut">Date debut: {{ semaine.date_debut }}</label><br>
+                        <input type="date" id="date_debut" name="date_debut" value="{{ semaine.date_debut|date:'Y-m-d' }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date_fin">Date fin: {{ semaine.date_fin }}</label><br>
+                        <input type="date" id="date_fin" name="date_fin" value="{{ semaine.date_fin|date:'Y-m-d' }}">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-check form-group"> 
+                        <input class="form-check-input" type="radio" name="publish" id="flexRadioDefault1" value="1" {% if semaine.publich %} checked {% endif %}>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                            Publier
+                        </label>
+                    </div>
+                    <div class="form-check" form-group>
+                        <input class="form-check-input" type="radio" name="publish" id="flexRadioDefault2" 
+                            value="0" {% if not semaine.publich %} checked {% endif %}>
+                        <label class="form-check-label" for="flexRadioDefault2">
+                            Ne pas publier  
+                        </label>
+                    </div>
+                    
+                </div>
+
+                <button type="submit" form="form_{{ semaine.id }}" class="form-group">Modier</button>
+
+                
+            </form> <br>
+
+            <form action="{% url 'admin.delete.semaine' semaine.id %}" id="delete_{{ semaine.id }}" method="POST">
+                {% csrf_token %}
+                <button type="submit" form="delete_{{ semaine.id }}" class="form-group">Supprimer</button>
+            </form>
+        </div>
+    {% endfor %}
+
+{% endblock %}
