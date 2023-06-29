@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from home.models import Filiere, Salle, Semaine, Cours, Enseignant, Niveau, Programme
+from home.models import Filiere, Salle, Semaine, Cours, Enseignant, Niveau, Programme, Communique
 from datetime import datetime
 
 
@@ -10,9 +10,11 @@ from datetime import datetime
 def home(request):
 
     niveaux = Niveau.objects.all()
+    communiques = Communique.objects.all()
 
     context = {
-        "niveaux" : niveaux
+        "niveaux" : niveaux,
+        "communiques" : communiques,
     }
 
 
@@ -38,7 +40,7 @@ def master(request, pk):
     return render(request, 'home/master.html', context)
 
 @login_required()
-def niveau(request, pk):
+def affichageEmploi(request, pk):
 
 
     derniere_semaine = Semaine.objects.filter(publich=1).latest('date_debut')
@@ -47,12 +49,14 @@ def niveau(request, pk):
 
     niveaux = Niveau.objects.all()
     niveau = Niveau.objects.get(pk=pk)
+    communiques = Communique.objects.all()
 
     context = {
         "programmes" : programmes,
         'dernieresemaine' : derniere_semaine,
         'niveaux' : niveaux,
-        'niveau' : niveau
+        'niveau' : niveau,
+        'communiques' : communiques
         }
     
 
@@ -384,10 +388,12 @@ def modifierSemaine(request, semaine_id):
            
 
     semaines = Semaine.objects.all().order_by('-id')
+    niveaux = Niveau.objects.all()
 
     return render(request, 'home/liste_semaine.html', {
         'semaines': semaines,
-        'errors' : errors
+        'errors' : errors,
+        'niveaux' : niveaux
         
     })
 
@@ -404,3 +410,22 @@ def deleteSemaine(request, semaine_id):
         errors.append('Une erreur s\'est produite lors de la suppression ')
 
     return redirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def ajouter_communique(request):
+    
+    errors = []  
+    if request.method == 'POST':
+        titre = request.POST.get('titre')
+        contenu = request.POST.get('contenu')
+
+        if titre  and contenu:
+            communique = Communique.objects.create(titre=titre, contenu=contenu)
+            return redirect('admin_index')  
+        
+        else:
+            errors.append("Remplissez tous les champs")
+        
+    return render(request, 'home/ajouter_commi.html', {
+        'errors': errors
+    })

@@ -54,6 +54,12 @@ class Programme(models.Model):
     heure_fin=models.IntegerField()
 
     filieres = models.ManyToManyField(Filiere)
+    
+class Communique(models.Model):
+    titre  =models.CharField(max_length=255) 
+    contenu = models.CharField(max_length=255) 
+    date_commu = models.DateField(null=True,auto_now=True)
+    
 
 
     
