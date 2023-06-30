@@ -19,7 +19,7 @@ def login(request):
 
             if user is not None:
                 
-                if user.username == "55555":
+                if user.username == "55555555":
                     user_login(request, user)
                     return redirect('admin_index')
                 user_login(request, user)
@@ -52,25 +52,30 @@ def register(request):
         confirm_password = request.POST.get('confirm_password')
 
         if password and matricule and firstname and lastname:
+            if len(matricule) == 8 and matricule.isdigit():
+                
+                if password == confirm_password:
+                    user = User.objects.create_user(
+                        username=matricule,
+                        first_name=firstname,
+                        last_name=lastname,
+                        email=email,
+                        password=password,
+                    )
 
-            if password == confirm_password:
-                user = User.objects.create_user(
-                    username=matricule,
-                    first_name=firstname,
-                    last_name=lastname,
-                    email=email,
-                    password=password,
-                )
+                    user = authenticate(request, username=matricule, password=password)
+                    if user is not None:
+                        user_login(request, user)
+                        return redirect('home')
+                    else:
+                        errors.append("Mot de passe ou numero matricule invalide")
 
-                user = authenticate(request, username=matricule, password=password)
-
-            errors.append("Vos deux mots de passe ne sont pas identiques")
-
-
-            if user is not None:
-                user_login(request, user)
-                return redirect('home')
-            errors.append("Mot de passe ou numero matricule invalide")
+                else:
+                    errors.append("Vos deux mots de passe ne sont pas identiques")
+            else:
+                errors.append("Entrer un matricule valide")
+                
+    else:
         errors.append("Veuillez remplir tout les champs")
 
     context = {

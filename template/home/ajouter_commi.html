@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block 'title' %} Se Connecter {% endblock %}
+{% block 'title' %} Communiqué {% endblock %}
 
 {% block 'main' %}
 <style>
@@ -10,7 +10,8 @@
     }
 </style>
 <div class="insform">
-    <form action method="post">
+    <h1>Ajouter communiqué</h1>
+    <form action method="POST">
         {% if errors %}
         <div class="w-100 justify-content-center">
             <div class="m-auto border-danger">
@@ -23,14 +24,15 @@
         </div>
         {% endif %}
         {% csrf_token %}
-        <label for="Matricule">Matricule</label><br>
-        <input type="text" name="matricule" id="matricule" maxlength="8"
-            placeholder="202343456"><br>
-        <label for="password">Mot de passe</label><br>
-        <input type="password" name="password" id="password"
-            placeholder="password"> <br>
-        <button type="submit">connecter</button>
-        <a href="{% url 'password.forgot' %}" style="margin-left: 20%;">Forgot Password?</a>
+        <label for="titre">Titre</label><br>
+        <input type="text" name="titre" id="titre" 
+            placeholder="Ttitre"><br>
+        
+        <label for="contenu">Contenu</label><br>
+        <input type="text" name="contenu" id="contenu" 
+            placeholder="Communiqué"><br>
+
+        <button type="submit">Publier</button>
     </form>
 </div>
 {% endblock %}

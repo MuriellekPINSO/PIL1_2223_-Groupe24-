@@ -211,10 +211,16 @@
   </div>
 {% endif %}
 
-<div class="insform">
-    
-    {% for programme in programmes %}
 
+<div class="emploi-titre">
+    <h3>Communiqués</h3>
+</div>
+<div class="emploi-titre">
+    
+    {% for communique in communiques %}
+        <h4>{{  communique.titre }}</h4>
+        <h4>{{  communique.contenu }}</h4>
+         <h6>{{ communique.date_commu}}</h6>
     {% endfor %}
 </div>
 {% endblock %}
