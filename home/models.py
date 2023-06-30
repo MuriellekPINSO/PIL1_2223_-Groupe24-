@@ -52,6 +52,7 @@ class Programme(models.Model):
     jour=models.CharField(default = 'Lundi', max_length=20)
     heure_deb=models.IntegerField()
     heure_fin=models.IntegerField()
+    heure_fin=models.DateField(auto_now=True)
 
     filieres = models.ManyToManyField(Filiere)
 

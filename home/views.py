@@ -247,6 +247,8 @@ def ajouterProgramme(request, pk):
                 niveau = Niveau.objects.get(pk=niveau_id)
                 enseignant = Enseignant.objects.get(pk=enseignant_id)
 
+                
+
                 if programme_pk is None:
                     programme = Programme.objects.create(
                             niveau=niveau,
@@ -259,6 +261,7 @@ def ajouterProgramme(request, pk):
                             enseignant = enseignant
                             
                     )
+                
 
                     programme.filieres.set(filieres_ids)
 
