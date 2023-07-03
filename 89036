@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,4 +176,183 @@
             </ol>
         </p>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="rapport.css">
+</head>
+<body>
+   <h1> Rapport de Projet: Gestion de l'emploi de Temps</h1>
+     <h2>Groupe 24 </h2>
+     <p>
+       <b>Membre du groupe</b>:
+        <ul>
+            <li>AZONHOUMON Lionnel</li>
+            <li> ATACOLODJOU Regis</li>
+            <li>AHOSSAN Boris</li>
+            <li>BIRISSO Rayan</li>
+            <li>BONOU Augustin</li>
+            <li> DAKO Nelly</li>
+            <li>DOVOEDO Amen</li>
+            <li>DJIBODE Floriane</li>
+            <li>FANOUGBO Leticia</li>
+            <li>GOUCHNA Nicodeme</li>
+            <li>KOUSSA Doria</li>
+            <li>KOUISSODE Marcial</li>
+            <li>KPINSO Murielle</li>
+            <li>BONOU Augustin</li>
+        </ul>
+     </p>
+     <h2>Mode de Fonctionnement Interne du Groupe</h2>
+     <p>
+        le Groupe 24 a travaillè de manière collaborative malgres l'abscence de plusieurs membres pour realiser ce 
+        projet de gestion de l'emploi du temps.
+        Nous avons suivi une approche agile, en utilisant des itèrations de developpement et des reunions regulieres
+        pour assurer la coordination et le suivi du projet.
+     </p>
+     <h3>Rôles et Contributions des Membres</h3>
+     <ul>
+        <li>
+           <strong> BIRISSO Rayan</strong>:
+            Responsable du developpement front-end. Il a été chargé de la conception de l'interface utilisateur,
+             en utilisant HTML,CSS et JavaScript.
+        </li><br>
+        <li>
+            <strong>KPINSO Murielle</strong>:
+            Responsable de la gestion du projet. Elle a supervisé les activités globales, coordonné les efforts 
+            des membres et assuré la communication avec les parties prenantes externes. <br>
+            Responsable pour la realisation de la base de données,elle a gérée  l'interration entre la page d'incriptiion et la base de donnees par les requetes
+             
+        </li><br>
+        <li>
+            <strong>FANOUGBO Léticia</strong>:
+            Responsable du developpement back-end.Elle a été charger de de faire quelque requetes pour l'interration entre l'administration et l'emploie du temps
+        </li><br>
+        <li>
+            <strong> DAKO Nelly</strong>:
+            Realisation du Diagramme de Flux. Elle a contribué a la definition des fonction-
+            nalités clés de l'application.
+        </li><br>
+        <li>
+            <strong>AZONHOUMON Lionnel</strong>:
+            Apport et Contributions  dans la realisation du font-end. Il a été charger de l'interface utilisateur et administrative
+
+
+        </li><br>
+        <li>
+            <strong>ATACOLODJOU Regis</strong>:
+            Apport et Contributions  dans la realisation du font-end. Il a été de l'interface utilisateur et administrative
+
+        </li>
+        <br>
+
+      
+        <li>
+            <strong>BONOU Augustin</strong>:
+            Apport et Contributions  dans la realisation du back-end et du bade de données. Il a été  charger de quelque requete faites  pour l'interration entre la base de donnees et l'emploie du temps
+
+        </li>
+        <br>
+        <h2> Instructions de Deploiement</h2>
+        
+        <p> <h3># PIL1_2223_24 </h3></p>
+
+
+
+            <p>Ce projet est une application web de gestion des emplois du temps pour
+            un établissement d’enseignement supérieur, notamment l’IFRI.</p>
+            
+           <ol> <h3>## Fonctionnalités</h3></ol>
+            <li>
+            Gestion des enseignements et de la masse horaire [fait par les Coordonnateurs de formation] <br></li>
+           <li> Planification des emplois de temps [fait par les Coordonnateurs de formation]<br> </li>
+           <li> Consultation des emplois du temps publiés [par les étudiants,si possible par l'enseignant]<br></li>
+        
+            
+           <ul> <h3>## Installation</h3></ul> 
+           
+            
+           <h4>Pour cloner et utiliser ce référentiel, suivez les étapes ci-dessous :</h4> 
+            <li>
+             Assurez-vous d'avoir Git installé sur votre système. Si ce n'est pas le cas, vous pouvez le télécharger et l'installer à partir du site officiel de Git : https://git-scm.com/downloads.
+        </li>
+        <li>
+             Ouvrez votre terminal ou votre interface de ligne de commande.
+        </li>
+        <li>
+             Accédez au répertoire dans lequel vous souhaitez cloner le projet en utilisant la commande `cd` :
+            
+            ```bash
+            cd chemin/vers/le/répertoire
+            ```
+        </li>
+        <li>
+             Clonez le référentiel en utilisant la commande `git clone` :
+            
+            ```bash
+            git clone https://github.com/BlakvGhost/PIL1_2223_24.git
+            ```
+        </li>
+        <li>
+             Accédez au répertoire du projet nouvellement cloné :
+            ```bash
+            cd PIL1_2223_24
+            ```
+        </li>
+        <li> 
+             Installer Django:
+            ```bash
+            pip install -r requirements.py
+            ```
+        </li>
+        <li>Configurer une base de données dans le ficher "Settings"</li>
+        <li>Lancer la migration "python manage.py migrate"</li>
+        <li>    
+             Demarrer le serveur d'application django:
+            ```bash
+            python manage.py runserver
+            ```
+        </li>
+            
+            
+            <p> <h3>## Tech Stack</h3> 
+            
+            **Client:** HTML5, CSS3 <br>
+            
+            **Server:** Django <br>
+            
+            <h3>## Authors</h3> 
+            
+            - [@Groupe24](https://github.com/BlakvGhost/PIL1_2223_24)
+            
+            
+            <h3>## License</h3> 
+            
+            Ce projet est distribué sous la licence:<br>
+            [MIT](https://choosealicense.com/licenses/mit/).
+            
+          
+        </p>
+        </ol>
+        <h1>Rapport d'utilisation</h1>
+        <p>L'application web de gestion d'emploie du temps est concue pour faciliter la consultation et l'edition des emploie du temps puis assuré une communication efficace entre l'administrationet et les etudiants
+            . Ce manuel d'utilisation vous propose une guide étapes par étapes pour utiliser pleinement l'application .
+            Une fois l'application deployer suivés lesninstruction suivantes: <br>
+            <ol>
+                <li>Cliquer sur  le bouton s'inscire pour creer un compte</li>
+                <li>Remplissez le formulaire d'inscription en saisissant vos information personnelles</li>
+                <li>Valider l'inscription en cliquant sur le bouton s'inscire </li>
+                <li>Si vous avez deja un compte alors:cliquer sur  le bouton se connecter : </li>
+                <li>Si vous etes administrateur il suffit de vous connecter via votre matricule pour acceder a votre page d'acceuil pour editer ou modifier votre emploie du temps</li>
+                <li>Apres etre connecter en tant que etudiants vous etre diriger vers la page acceuil ou vous pouvez visualisez votre emploie ou en savoir sur les imforations a communiquer </li>
+                <li>Apres etre connecter en tant qu'Administrateur vous acceder a une page ou vous pouvez editer l'emploie du temps en fesant reference a quelque liens qui vvous permetra d'ajouter les salles,prof ,etc.... dans la bases pour faire l'emploie du temps ,vous avez aussi de modifier l'emploie du temps </li>
+            </ol>
+        </p>
+</body>
+>>>>>>> ad911145ec110811ed80eac6e912929630330c11
 </html>
