@@ -532,7 +532,8 @@ def masseHoraire(request, enseignant_pk):
     context = {
         'enseignant': enseignant,
         'cours_distribues': cours_distribues,
-        'total_heures_tous_cours': total_heures_tous_cours
+        'total_heures_tous_cours': total_heures_tous_cours,
+        'enseignant' : enseignant
     }
 
     return render(request, 'home/masse.horaire.html', context)

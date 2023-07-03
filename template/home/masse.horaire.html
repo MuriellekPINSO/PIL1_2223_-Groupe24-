@@ -31,6 +31,12 @@ form {
 .form-group {
   flex: 1;
 }
+.title {
+  color: white;
+}
+.matiere-title {
+  color: white;
+}
 
 button[type="submit"] {
   align-self: flex-end;
@@ -51,6 +57,7 @@ button[type="submit"] {
         margin-right: 3%;
         font-size: 20px;
         color: rgb(168, 168, 243);
+        text-align: center;
 }
 
 .programme button {
@@ -58,6 +65,7 @@ button[type="submit"] {
     width: 95px;
     background-image: linear-gradient(to left, #e66465, #9198e5);
     border-radius: 8px;
+    
 }
 .programme form input {
     width: 300px;
@@ -86,17 +94,19 @@ button[type="submit"] {
     margin-left: 3%;
 }
 </style>
-
-    <h1>Masse horaire</h1>
+<div class="programme">
+  
+    <h1 class="title">Masse horaire des matières enseignées par {{ enseignant.nom }} {{ enseignant.prenom }}</h1>
 
     {% for cours in cours_distribues %}
     <div>
-        <h3>{{ cours.cours.nom_cours }}</h3>
-        <p>Masse horaire du cours: {{ cours.cours.masse_horaire }}</p>
-        <p>Nombre d'heures effectuées: {{ cours.total_heures_effectuees }}</p>
+        <h3 class="matiere-title">{{ cours.cours.nom_cours }} : </h3>
+        <p>Masse horaire du cours: {{ cours.cours.masse_horaire }}h</p>
+        <p>Nombre d'heures effectuées: {{ cours.total_heures_effectuees }}h</p>
     </div>
 {% endfor %}
 
-<p>Total des heures de l'enseignant: {{ total_heures_tous_cours }}</p>
+<p>Total des heures de l'enseignant: {{ total_heures_tous_cours }}h</p>
+</div>
 
 {% endblock %}
