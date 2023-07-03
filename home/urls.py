@@ -24,6 +24,7 @@ urlpatterns = [
     path('administration/delete/<int:programme_id>', views.deleteProgramme, name="programme.delete"),
     path('administration/ajouter/communique', views.ajouter_communique, name="ajouter.communique"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     path('administration/list/matiere', views.listeMatiere, name="admin.list.matiere"),
     path('administration/modifier/amtiere/<int:pk>', views.modifierMatiere, name="admin.modifier.matiere"),
@@ -31,6 +32,8 @@ urlpatterns = [
 
     path('administration/enseignant/horaire/<int:enseignant_pk>', views.masseHoraire, name="admin.enseignant.horaire"),
 
+=======
+>>>>>>> ad911145ec110811ed80eac6e912929630330c11
 =======
 >>>>>>> ad911145ec110811ed80eac6e912929630330c11
 ]
