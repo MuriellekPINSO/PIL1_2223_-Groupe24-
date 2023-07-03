@@ -19,9 +19,11 @@
 
 <nav class="after-auth" style="display: none;">
         <ul>
-          <li class="deroulant"><a href>Liste &ensp;</a>
+          <div>
+            <li class="deroulant"><a href>Liste &ensp;</a>
                 <ul class="sous">
                     <li><a href="{% url 'admin.liste.semaine' %}">Semaines</a></li>
+                    <li><a href="{% url 'admin.list.matiere' %}">Matières</a></li>
                 </ul>
             </li>
             <li class="deroulant"><a href>Autres actions &ensp;</a>
@@ -29,7 +31,7 @@
                     <li><a href="{% url 'admin.ajouter.semaine' %}">Ajouter une semaine</a></li>
                     <li><a href="{% url 'admin.creer.filiere' %}">Ajouter une filière</a></li>
                     <li><a href="{% url 'admin.ajouter.salle' %}">Ajouter une salle</a></li>
-                    <li><a href="{% url 'admin.ajouter.matiere' %}">Ajouter une matiere</a></li>
+                    <li><a href="{% url 'admin.ajouter.matiere' %}">Ajouter une matière</a></li>
                     <li><a href="{% url 'admin.ajouter.enseignant' %}">Ajouter un enseignant</a></li>
                     <li><a href="{% url 'admin.ajouter.niveau' %}">Ajouter un niveau d'étude</a></li>
                 </ul>
@@ -43,6 +45,15 @@
             </li>
 
             <li><a href="{% url 'ajouter.communique' %}">Ajouter communiqué</a></li>
+          </div><br><br><br><br>
+
+            <li class="deroulant"><a href>Masse horaire&ensp;</a>
+              <ul class="sous">
+              {% for enseignant in enseignants %}
+                <li><a href="{% url 'admin.enseignant.horaire' enseignant.id  %}">{{ enseignant.nom }} {{ enseignant.prenom }}</a></li>
+              {% endfor %}
+              </ul>
+            </li>
             
         </ul>
     </nav>

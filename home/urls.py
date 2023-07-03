@@ -23,4 +23,11 @@ urlpatterns = [
     path('niveau/emploi/<int:pk>', views.affichageEmploi, name="emploi.niveau"),
     path('administration/delete/<int:programme_id>', views.deleteProgramme, name="programme.delete"),
     path('administration/ajouter/communique', views.ajouter_communique, name="ajouter.communique"),
+
+    path('administration/list/matiere', views.listeMatiere, name="admin.list.matiere"),
+    path('administration/modifier/amtiere/<int:pk>', views.modifierMatiere, name="admin.modifier.matiere"),
+    path('administration/matiere/delete/<int:matiere_pk>', views.deleteMatiere, name="admin.matiere.delete"),
+
+    path('administration/enseignant/horaire/<int:enseignant_pk>', views.masseHoraire, name="admin.enseignant.horaire"),
+
 ]
