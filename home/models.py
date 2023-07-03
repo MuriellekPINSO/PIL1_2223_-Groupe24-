@@ -34,6 +34,7 @@ class Cours(models.Model):
     nom_cours=models.CharField(max_length=64) 
     niveau = models.ForeignKey(Niveau, on_delete=models.CASCADE, null=True)
     filiere = models.ForeignKey(Filiere, on_delete=models.CASCADE, null=True)
+    masse_horaire = models.IntegerField(null=True)
 
 class Enseignant(models.Model):
     nom = models.CharField(max_length=50)
@@ -52,7 +53,6 @@ class Programme(models.Model):
     jour=models.CharField(default = 'Lundi', max_length=20)
     heure_deb=models.IntegerField()
     heure_fin=models.IntegerField()
-    heure_fin=models.DateField(auto_now=True)
 
     filieres = models.ManyToManyField(Filiere)
     

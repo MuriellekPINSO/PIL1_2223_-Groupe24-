@@ -1,0 +1,161 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Creer un compte {% endblock %}
+
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
+    }
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  flex: 1; 
+}
+
+.sidebar {
+  flex: 1; 
+  margin-top: 10%;
+}
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+button[type="submit"] {
+  align-self: flex-end;
+}
+
+.delete-botton {
+  margin-top: 3%;
+}
+
+
+
+
+    .programme  {
+        width: auto;
+        height: auto;
+        margin-top: 5%;
+        margin-left: 3%;
+        margin-right: 3%;
+        font-size: 20px;
+        color: rgb(168, 168, 243);
+}
+
+.programme button {
+    height: 40px;
+    width: 95px;
+    background-image: linear-gradient(to left, #e66465, #9198e5);
+    border-radius: 8px;
+}
+.programme form input {
+    width: 300px;
+    height: 35px;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+.programme form select {
+    width: 300px;
+    height: 35px;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+
+.select-multiple {
+    width: 300px;
+    height: 75px !important;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+
+.prog-text {
+    margin-left: 3%;
+}
+</style>
+
+    <h1>Liste semaines</h1>
+
+    {% if errors %}
+            <div class="w-100 justify-content-center">
+                <div class="m-auto border-danger">
+                    <div style="padding: 1rem;" class="text-light">
+                        {% for error in errors %}
+                        <p> {{ error }} </p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+    {% if success %}
+            <div class="w-100 justify-content-center">
+                <div class="m-auto border-success">
+                    <div style="padding: 1rem;" class="text-light">
+                        <p> {{ error }} </p>
+                      
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+    
+    {% for matiere in matieres %}
+        <div class="programme">
+        <form action= "{% url 'admin.modifier.matiere' matiere.id  %}" method="POST" id="form_{{ matiere.id }}">
+            
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="form-group">
+                    <label for="nom_cours">Nom matière :</label><br>
+                    <input type="text" id="nom_cours" name="nom_cours" value="{{ matiere.nom_cours }}"><br>
+                </div>
+                <div class="form-group">
+                    <label for="masse_horaire">Masse horaire :</label><br>
+                    <input type="number" id="masse_horaire" name="masse_horaire" value="{{ matiere.masse_horaire }}"><br>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+
+                <div class="form-group">
+                    <label for="niveau">Niveau :</label><br>
+                    <select id="niveau" name="niveau">
+                    {% for niveau in niveaux %}
+                    
+                        <option value="{{ niveau.id }}" {% if matiere.niveau.id == niveau.id %} selected {% endif %}>{{ niveau.nom }}</option>
+                    {% endfor %}
+                    </select>
+
+                </div>
+                <div class="form-group">
+                    <button type="submit" form="form_{{ matiere.id }}">Mofifier</button>
+                </div>
+
+            </div>
+            
+        </form>
+
+        <form action="{% url 'admin.matiere.delete' matiere.id %}" method="post" id="delete_{{ matiere.id }}">
+        {% csrf_token %}
+            <button type="submit" form="delete_{{ matiere.id }}" class="delete-botton">Supprimer</button>
+        </form>
+    </div>
+    {% endfor %}
+
+{% endblock %}

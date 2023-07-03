@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from home.models import Filiere, Salle, Semaine, Cours, Enseignant, Niveau, Programme, Communique
 from datetime import datetime
+from django.db.models import ExpressionWrapper, F, Sum, IntegerField
 
 
 # Create your views here.
@@ -69,8 +70,10 @@ def admin_index(request):
     semaines = Semaine.objects.all().order_by('-nemuro_semaine')
     niveaux = Niveau.objects.all()
 
+    enseignants = Enseignant.objects.all()
 
-    return render(request, 'home/admi.html', {'semaines' : semaines, 'niveaux' : niveaux})
+
+    return render(request, 'home/admi.html', {'semaines' : semaines, 'niveaux' : niveaux, 'enseignants' : enseignants})
 
 @login_required()
 def creer_filiere(request):
@@ -152,6 +155,8 @@ def ajouterMatiere(request):
         nom_matiere = request.POST.get('name')
         filiere_id = request.POST.get('filiere')
         niveau_id = request.POST.get('niveau')
+        horaire = request.POST.get('masse_horaire')
+        pk = request.POST.get('matiere_pk')
 
         if nom_matiere  and filiere_id and niveau_id:
 
@@ -159,8 +164,20 @@ def ajouterMatiere(request):
                 filiere = Filiere.objects.get(pk=filiere_id)
                 niveau = Niveau.objects.get(pk=niveau_id)
 
-                cours = Cours.objects.create(nom_cours=nom_matiere, niveau=niveau, filiere = filiere)
-                cours.save()
+                if pk is None:
+
+                    cours = Cours.objects.create(nom_cours=nom_matiere, niveau=niveau, filiere = filiere)
+                    cours.save()
+                    if horaire:
+                        cours.masse_horaire = horaire
+                        cours.save()
+                else:
+                    matiere = Cours.objects.get(pk = pk)
+
+                    matiere.nom_cours = nom_matiere
+                    matiere.niveau = niveau
+                    matiere.filiere = filiere
+                    matiere.masse_horaire = horaire
                 return redirect('admin_index')  
             except (Filiere.DoesNotExist, Niveau.DoesNotExist):
                 errors.append("La filière ou le niveau n'existe pas")
@@ -302,7 +319,7 @@ def ajouterProgramme(request, pk):
     salles = Salle.objects.all()
     niveaux = Niveau.objects.all()
     enseignants = Enseignant.objects.all()
-    derniere_semaine = Semaine.objects.latest('id')
+    #derniere_semaine = Semaine.objects.latest('id')
 
     
     derniere_semaine = Semaine.objects.filter(publich=0).latest('date_debut')
@@ -432,3 +449,90 @@ def ajouter_communique(request):
     return render(request, 'home/ajouter_commi.html', {
         'errors': errors
     })
+
+@login_required
+def listeMatiere(request):
+    matieres = Cours.objects.all().order_by('-id')
+    niveaux = Niveau.objects.all().order_by('-id')
+    filieres = Filiere.objects.all().order_by('-id')
+
+    return render(request, 'home/liste_matieres.html', {
+        'matieres': matieres,
+        'niveaux': niveaux,
+        'filieres': filieres,
+
+    })
+
+@login_required()
+def modifierMatiere(request, pk):
+
+    errors = []  
+    if request.method == 'POST':
+        nom_matiere = request.POST.get('nom_cours')
+        niveau_id = request.POST.get('niveau')
+        horaire = request.POST.get('masse_horaire')
+
+        if nom_matiere and niveau_id and horaire:
+
+            try:
+                niveau = Niveau.objects.get(pk=niveau_id)
+                matiere = Cours.objects.get(pk=pk)
+                matiere.nom_cours = nom_matiere
+                matiere.niveau = niveau
+                matiere.masse_horaire = horaire
+
+                matiere.save()
+
+                return redirect('admin.list.matiere') 
+             
+            except (Filiere.DoesNotExist):
+
+                errors.append("La matiere n'existe pas")
+        else:
+
+            errors.append("Remplissez tous les champs") 
+
+
+        return redirect(request.META.get('HTTP_REFERER'), {'errors': errors})
+    
+@login_required
+def deleteMatiere(request, matiere_pk):
+    errors = []
+
+    try:
+        matiere = get_object_or_404(Cours, pk=matiere_pk)
+        matiere.delete()
+    except Cours.DoesNotExist:
+        errors.append('La matiere spécifié n\'existe pas')
+    except Exception as e:
+        errors.append('Une erreur s\'est produite lors de la suppression ')
+
+    return redirect(request.META.get('HTTP_REFERER'))
+
+    
+@login_required
+def masseHoraire(request, enseignant_pk):
+    # Récupérer l'enseignant
+    enseignant = Enseignant.objects.get(id=enseignant_pk)
+
+    # Récupérer tous les cours distribués par l'enseignant
+    cours_distribues = Programme.objects.filter(enseignant=enseignant)
+
+    # Calculer le nombre total d'heures effectuées par l'enseignant pour chaque cours
+    for cours in cours_distribues:
+        cours.total_heures_effectuees = Programme.objects.filter(enseignant=enseignant, cours=cours.cours).aggregate(
+            total_heures=ExpressionWrapper(Sum(F('heure_fin') - F('heure_deb')), output_field=IntegerField())
+        )['total_heures']
+
+    # Calculer le nombre total d'heures effectuées par l'enseignant sur tous les cours
+    total_heures_tous_cours = Programme.objects.filter(enseignant=enseignant).aggregate(
+        total_heures=ExpressionWrapper(Sum(F('heure_fin') - F('heure_deb')), output_field=IntegerField())
+    )['total_heures']
+
+    context = {
+        'enseignant': enseignant,
+        'cours_distribues': cours_distribues,
+        'total_heures_tous_cours': total_heures_tous_cours
+    }
+
+    return render(request, 'home/masse.horaire.html', context)

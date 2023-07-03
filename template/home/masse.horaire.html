@@ -1,0 +1,102 @@
+{% extends 'base/base.html' %}
+
+{% block 'title' %} Creer un compte {% endblock %}
+
+{% block 'main' %}
+<style>
+    .bg-auth {
+        background-image: url('/static/img/bg-auth.jpg');
+        background-size: cover;
+    }
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+form {
+  flex: 1; 
+}
+
+.sidebar {
+  flex: 1; 
+  margin-top: 10%;
+}
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+}
+
+button[type="submit"] {
+  align-self: flex-end;
+}
+
+.delete-botton {
+  margin-top: 3%;
+}
+
+
+
+
+    .programme  {
+        width: auto;
+        height: auto;
+        margin-top: 5%;
+        margin-left: 3%;
+        margin-right: 3%;
+        font-size: 20px;
+        color: rgb(168, 168, 243);
+}
+
+.programme button {
+    height: 40px;
+    width: 95px;
+    background-image: linear-gradient(to left, #e66465, #9198e5);
+    border-radius: 8px;
+}
+.programme form input {
+    width: 300px;
+    height: 35px;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+.programme form select {
+    width: 300px;
+    height: 35px;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+
+.select-multiple {
+    width: 300px;
+    height: 75px !important;
+    border-radius: 6px;
+    border-style: none;
+    margin-bottom: 3vh;
+}
+
+.prog-text {
+    margin-left: 3%;
+}
+</style>
+
+    <h1>Masse horaire</h1>
+
+    {% for cours in cours_distribues %}
+    <div>
+        <h3>{{ cours.cours.nom_cours }}</h3>
+        <p>Masse horaire du cours: {{ cours.cours.masse_horaire }}</p>
+        <p>Nombre d'heures effectuées: {{ cours.total_heures_effectuees }}</p>
+    </div>
+{% endfor %}
+
+<p>Total des heures de l'enseignant: {{ total_heures_tous_cours }}</p>
+
+{% endblock %}

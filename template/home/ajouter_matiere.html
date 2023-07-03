@@ -23,9 +23,9 @@
         </div>
         {% endif %}
         {% csrf_token %}
-        <label for="name">Nom se la salle</label><br>
+        <label for="name">Nom la matière</label><br>
         <input type="text" name="name" id="name" 
-            placeholder="nom matière"><br>
+            placeholder="nom matière"><br><br>
 
         <div>
             <label for="filiere">Spécialité :</label>
@@ -34,7 +34,7 @@
                 <option value="{{ filiere.id }}">{{ filiere.name }}</option>
             {% endfor %}
             </select>
-        </div>
+        </div><br><br>
 
         <div>
             <label for="niveau">Niveau :</label>
@@ -43,7 +43,13 @@
                 <option value="{{ niveau.id }}">{{ niveau.nom }}</option>
             {% endfor %}
             </select>
-        </div>
+        </div><br><br>
+        
+        <div>
+            <label for="masse_horaire">Masse Horaire :</label>
+            <input type="masse_horaire" id="masse_horaire" name="masse_horaire" min="1">
+
+        </div><br><br>
         
         <button type="submit">Ajouter</button>
     </form>
