@@ -44,7 +44,12 @@ def master(request, pk):
 def affichageEmploi(request, pk):
 
 
-    derniere_semaine = Semaine.objects.filter(publich=1).latest('date_debut')
+    try:
+
+        derniere_semaine = Semaine.objects.filter(publich=1).latest('date_debut')
+    except Semaine.DoesNotExist:
+        return render(request, 'home/emploi_par_niveau.html', {"message": "Aucun programme disponible"})
+
 
     programmes = Programme.objects.filter(niveau=pk, semaine=derniere_semaine.id).order_by('heure_deb')
 
@@ -57,7 +62,8 @@ def affichageEmploi(request, pk):
         'dernieresemaine' : derniere_semaine,
         'niveaux' : niveaux,
         'niveau' : niveau,
-        'communiques' : communiques
+        'communiques' : communiques,
+        'message': ''
         }
     
 
@@ -322,7 +328,7 @@ def ajouterProgramme(request, pk):
     #derniere_semaine = Semaine.objects.latest('id')
 
     
-    derniere_semaine = Semaine.objects.filter(publich=0).latest('date_debut')
+    derniere_semaine = Semaine.objects.filter(publich=1).latest('date_debut')
 
 
     programmes = Programme.objects.filter(semaine=pk)
